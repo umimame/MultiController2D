@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 898172476}
   - component: {fileID: 898172475}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: playerObj
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,6 +323,7 @@ GameObject:
   - component: {fileID: 1902834376}
   - component: {fileID: 1902834375}
   - component: {fileID: 1902834377}
+  - component: {fileID: 1902834378}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -410,3 +411,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+--- !u!114 &1902834378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902834374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249dcee03ad1b864994454dec669a37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotData:
+    frame: 60
+    type: 1
+    bullet: {fileID: 8115952252840295330, guid: 92ad05f3b36a574438e80c967af477d1, type: 3}
