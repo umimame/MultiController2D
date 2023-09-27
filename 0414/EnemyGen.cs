@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyGen : MonoBehaviour
 {
     public GameObject EnemyPrefab;
-    private int GenSpan;
+    public int GenSpan;
     private float time;
     // Start is called before the first frame update
     void Start()
     {
-        GenSpan = 1;
+        GenSpan = 3;
         time = 0;
     }
 
