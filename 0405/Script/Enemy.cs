@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     {
 
         // プレイヤーとの距離が0.1f未満になったらそれ以上実行しない
-        if (Vector2.Distance(transform.position, playerTr.position) < 0.1f)
+        if (Vector2.Distance(transform.position, playerTr.position) < 2f)
             return;
 
         // プレイヤーに向けて進む

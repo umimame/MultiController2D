@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8564737757763235292}
   - component: {fileID: 1660448555838589342}
   - component: {fileID: 8115952252840295330}
+  - component: {fileID: -1020513428298179328}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -99,3 +100,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   moveVec: {x: -1, y: 0, z: 0}
+--- !u!50 &-1020513428298179328
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141444776734026286}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
