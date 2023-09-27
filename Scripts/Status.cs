@@ -20,20 +20,14 @@ public class Status
     public float entity { get; set; }
     [field: SerializeField] public float max { get; set; }
 
-    public Parameter()
+    public Parameter() { }
+
+    public void Initialize()
     {
         entity = max;
     }
 }
 
-[Serializable] public class Engine
-{
-    [field: SerializeField] public Rigidbody2D rb { get; set; }
-    [field: SerializeField] public BoxCollider2D collider { get; set; }
-    [field: SerializeField] public SpriteRenderer sprite { get; set; }
-    [field: SerializeField] public float time { get; set; }
-
-}
 
 public class Chara : MonoBehaviour
 {
@@ -43,24 +37,17 @@ public class Chara : MonoBehaviour
     protected virtual void Start()
     {
         Debug.Log("Initialize");
-        hp = new Parameter();
-        speed = new Parameter();
-
-        EngineInitialize();
+        speed.Initialize();
+        engine = GetComponent<Engine>();
     }
 
     protected virtual void Update()
     {
-        engine.rb.velocity = KeyMapCallBack.Move.normalized * speed.entity;
-        Debug.Log(engine.rb.velocity);
+        engine.velocityPlan = new Vector2(0.0f, 0.0f);
+        engine.velocityPlan += KeyMapCallBack.Move.normalized * speed.entity;
+
+        engine.VelocityResult();
+
     }
 
-    private void EngineInitialize()
-    {
-        engine = new Engine();
-        engine.rb = GetComponent<Rigidbody2D>();
-        engine.collider = GetComponent<BoxCollider2D>();
-        engine.sprite = GetComponent<SpriteRenderer>();
-        engine.time = 0.0f;
-    }
 }
