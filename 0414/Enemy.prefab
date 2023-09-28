@@ -4933,8 +4933,7 @@ MonoBehaviour:
   hp: 0
   self: {fileID: 2845943648990830848}
   target: {fileID: 0}
-  particleSystemObject: {fileID: 0}
-  particleSystemComponent: {fileID: 0}
+  explosionSE: {fileID: 8300000, guid: 3c4e257057e46aa4491517cb54973d16, type: 3}
 --- !u!58 &4719179841595786961
 CircleCollider2D:
   m_ObjectHideFlags: 0
