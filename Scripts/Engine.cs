@@ -37,7 +37,7 @@ using UnityEngine.UIElements;
     {
         angle = AddFunction.Vec2ToAngle(velocityPlan.normalized);
         difference = transform.eulerAngles.z - angle;
-        //rb.velocity = velocityPlan;
+        rb.velocity = velocityPlan;
         //if (angle > 0.0f)
         //{
         //    PlusCurve();
@@ -57,10 +57,9 @@ using UnityEngine.UIElements;
         //        PlusCurve();
         //    }
         //}
-        Debug.Log(angle);
         //Quaternion look = Quaternion.LookRotation(transform.position - lookTarget.transform.position, Vector3.up);
         //transform.rotation = look * Quaternion.FromToRotation(-Vector3.forward, Vector3.forward);
-        transform.LookAt(lookTarget.transform, Vector3.forward);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position));
         
     }
 
