@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 3.0f;
+    [SerializeField] float moveSpeed = 60.0f;
     [SerializeField] Vector3 moveVec = new Vector3(-1, 0, 0);
 
     void Update()

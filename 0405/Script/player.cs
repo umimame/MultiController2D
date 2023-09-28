@@ -45,4 +45,12 @@ public class player : MonoBehaviour
 
         transform.position = position;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy_Bullet"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
