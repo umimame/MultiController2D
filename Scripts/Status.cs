@@ -36,7 +36,6 @@ public class Chara : MonoBehaviour
     [field: SerializeField] public Engine engine { get; set; }
     protected virtual void Start()
     {
-        Debug.Log("Initialize");
         speed.Initialize();
         engine = GetComponent<Engine>();
     }
@@ -44,9 +43,6 @@ public class Chara : MonoBehaviour
     protected virtual void Update()
     {
         engine.velocityPlan = new Vector2(0.0f, 0.0f);
-        engine.velocityPlan += KeyMapCallBack.Move.normalized * speed.entity;
-
-        engine.VelocityResult();
 
     }
 

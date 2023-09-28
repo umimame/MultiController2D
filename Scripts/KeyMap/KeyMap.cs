@@ -55,7 +55,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -66,7 +66,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -77,7 +77,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -88,19 +88,73 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Pad"",
+            ""id"": ""cc583bca-e6ae-4e00-b1a9-b6c399852aa5"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""429c9df8-2061-4f4c-a943-14c4cbb8b525"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fccb970c-2039-4278-93b0-eb14ce060dc5"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keybord"",
+            ""bindingGroup"": ""Keybord"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Pad"",
+            ""bindingGroup"": ""Pad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
         // Keybord
         m_Keybord = asset.FindActionMap("Keybord", throwIfNotFound: true);
         m_Keybord_Move = m_Keybord.FindAction("Move", throwIfNotFound: true);
+        // Pad
+        m_Pad = asset.FindActionMap("Pad", throwIfNotFound: true);
+        m_Pad_Move = m_Pad.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -204,7 +258,75 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         }
     }
     public KeybordActions @Keybord => new KeybordActions(this);
+
+    // Pad
+    private readonly InputActionMap m_Pad;
+    private List<IPadActions> m_PadActionsCallbackInterfaces = new List<IPadActions>();
+    private readonly InputAction m_Pad_Move;
+    public struct PadActions
+    {
+        private @KeyMap m_Wrapper;
+        public PadActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Pad_Move;
+        public InputActionMap Get() { return m_Wrapper.m_Pad; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PadActions set) { return set.Get(); }
+        public void AddCallbacks(IPadActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PadActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PadActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(IPadActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(IPadActions instance)
+        {
+            if (m_Wrapper.m_PadActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPadActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PadActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PadActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PadActions @Pad => new PadActions(this);
+    private int m_KeybordSchemeIndex = -1;
+    public InputControlScheme KeybordScheme
+    {
+        get
+        {
+            if (m_KeybordSchemeIndex == -1) m_KeybordSchemeIndex = asset.FindControlSchemeIndex("Keybord");
+            return asset.controlSchemes[m_KeybordSchemeIndex];
+        }
+    }
+    private int m_PadSchemeIndex = -1;
+    public InputControlScheme PadScheme
+    {
+        get
+        {
+            if (m_PadSchemeIndex == -1) m_PadSchemeIndex = asset.FindControlSchemeIndex("Pad");
+            return asset.controlSchemes[m_PadSchemeIndex];
+        }
+    }
     public interface IKeybordActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IPadActions
     {
         void OnMove(InputAction.CallbackContext context);
     }

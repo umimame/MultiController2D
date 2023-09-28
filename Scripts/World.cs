@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class World : MonoBehaviour
 {
@@ -56,6 +57,14 @@ public class KeyMapCallBack
                 return false;
             }
             return true;
+        }
+    }
+
+    public static void Schema()
+    {
+        foreach(var device in InputSystem.devices)
+        {
+            Debug.Log(device);
         }
     }
 }
