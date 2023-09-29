@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// これを継承して各コントローラーの動作を記述する<br/>
+/// InputToVelocityを基本動作に上書きする
+/// </summary>
 public class PlayerController : Chara
 {
-    private KeyMap keyMap;
+    [field: SerializeField] public Vector2 beforeVec { get; set; }
+    public KeyMap keyMap { get; private set; }
     [SerializeField] private PlayerInput input;
     protected override void Start()
     {
@@ -13,13 +18,13 @@ public class PlayerController : Chara
         keyMap = new KeyMap();
         keyMap.Enable();
         DeviceSeach();
+        beforeVec = Vector3.zero;
     }
 
     protected override void Update()
     {
         base.Update();
-        //engine.velocityPlan += keyMap.Pad.Move.ReadValue<Vector2>().normalized * speed.entity;
-        InputMove();
+        InputToVelocity();
 
         engine.VelocityResult();
 
@@ -40,6 +45,16 @@ public class PlayerController : Chara
         }
     }
     
+    protected virtual void InputToVelocity()
+    {
+        // 継承先でoverrideして使う
+    }
+
+    protected virtual bool Inputting
+    {
+        get { return true; }
+    }
+
     //private void KeyMapAdd()
     //{
     //    keyMap.Keybord.Move.started += OnMove;
@@ -55,22 +70,5 @@ public class PlayerController : Chara
     //public void OnMove(InputAction.CallbackContext value)
     //{
     //    engine.velocityPlan += value.ReadValue<Vector2>().normalized * speed.entity;
-    //}
-
-    private void InputMove()
-    {
-        if (input.currentControlScheme == "Keybord")
-        {
-            engine.velocityPlan += keyMap.Keybord.Move.ReadValue<Vector2>().normalized * speed.entity;
-        }
-        else if(input.currentControlScheme == "Pad")
-        {
-            engine.velocityPlan += keyMap.Pad.Move.ReadValue<Vector2>().normalized * speed.entity;
-        }
-    }
-
-    //private void OnMove(InputValue input)
-    //{
-    //    engine.velocityPlan += input.Get<Vector2>().normalized * speed.entity;
     //}
 }
