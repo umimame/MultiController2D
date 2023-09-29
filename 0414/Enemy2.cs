@@ -11,21 +11,24 @@ public class Enemy2 : MonoBehaviour
     [SerializeField] private Transform self;
     [SerializeField] private Transform target;
     // 爆発効果音
-
-
     public AudioClip explosionSE;
 
     //移動中の音
     public AudioSource moveSE;
-    //public AudioClip moveSE2;
 
+    private EnemyParticle enemyParticle;
     // Start is called before the first frame update
     void Start()
     {
-        speed = 15f;
+        speed = Random.Range(10.0f, 30.0f); ;
+        //speed = 1.0f;
         hp = 10;
         AssignPlayerAsTarget();
         MoveSE();
+        enemyParticle = GetComponent<EnemyParticle>();
+        ////変数をEnemyParticleに渡す
+        //enemyParticle.GetEnemyHp(hp);
+
     }
 
     // Update is called once per frame
@@ -34,20 +37,17 @@ public class Enemy2 : MonoBehaviour
         Move();
         if (Input.GetKeyDown(KeyCode.G))
         {
-            this.hp -= 5;
-            if (this.hp <= 0)
-            {
-                DestroySelf();
-            }
+            DestroySelf();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Enemy2csの" + hp);
         }
     }
     void Move()
     {
-
         Vector3 dir = (target.position - self.position);
-
         self.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-
         self.Translate(Vector3.up * speed * Time.deltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -66,6 +66,7 @@ public class Enemy2 : MonoBehaviour
         //        DestroySelf();
         //    }
         //}
+
     }
     [ContextMenu("Assign Player as Target")]
     private void AssignPlayerAsTarget()
@@ -75,7 +76,10 @@ public class Enemy2 : MonoBehaviour
     }
     void DestroySelf()
     {
+        Debug.Log("ぐえ～死んだンゴ");
         ExplosionSE();
+        // EnemyParticle スクリプトの OnTriggerEnter2D メソッドを呼び出す
+        enemyParticle.TriggerEnemyParticle();
         //自身を破壊
         Destroy(this.gameObject);
     }
