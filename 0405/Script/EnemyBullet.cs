@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 60.0f;
-    [SerializeField] Vector3 moveVec = new Vector3(-1, 0, 0);
+    [SerializeField] float moveSpeed = 100.0f;
+    
 
     void Update()
     {
-        float add_move = moveSpeed * Time.deltaTime;
-        transform.Translate(moveVec * add_move);
+        float add_move = moveSpeed;
     }
 
     public void SetMoveSpeed(float _speed)
@@ -18,8 +17,5 @@ public class EnemyBullet : MonoBehaviour
         moveSpeed = _speed;
     }
 
-    public void SetMoveVec(Vector3 _vec)
-    {
-        moveVec = _vec.normalized;
-    }
+    
 }

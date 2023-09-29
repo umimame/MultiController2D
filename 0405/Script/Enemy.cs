@@ -25,5 +25,9 @@ public class Enemy : MonoBehaviour
             transform.position,
             new Vector2(playerTr.position.x, playerTr.position.y),
             speed * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Destroy(gameObject);
+        }
     }
 }
