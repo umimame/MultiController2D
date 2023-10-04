@@ -35,6 +35,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack01"",
+                    ""type"": ""Button"",
+                    ""id"": ""a626169c-cd94-413c-9908-b185d68edcca"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99e7fe97-9053-470a-8b2a-e7a05ecb4586"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack01"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -152,6 +172,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // Keybord
         m_Keybord = asset.FindActionMap("Keybord", throwIfNotFound: true);
         m_Keybord_Move = m_Keybord.FindAction("Move", throwIfNotFound: true);
+        m_Keybord_Attack01 = m_Keybord.FindAction("Attack01", throwIfNotFound: true);
         // Pad
         m_Pad = asset.FindActionMap("Pad", throwIfNotFound: true);
         m_Pad_Move = m_Pad.FindAction("Move", throwIfNotFound: true);
@@ -217,11 +238,13 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Keybord;
     private List<IKeybordActions> m_KeybordActionsCallbackInterfaces = new List<IKeybordActions>();
     private readonly InputAction m_Keybord_Move;
+    private readonly InputAction m_Keybord_Attack01;
     public struct KeybordActions
     {
         private @KeyMap m_Wrapper;
         public KeybordActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Keybord_Move;
+        public InputAction @Attack01 => m_Wrapper.m_Keybord_Attack01;
         public InputActionMap Get() { return m_Wrapper.m_Keybord; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -234,6 +257,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Attack01.started += instance.OnAttack01;
+            @Attack01.performed += instance.OnAttack01;
+            @Attack01.canceled += instance.OnAttack01;
         }
 
         private void UnregisterCallbacks(IKeybordActions instance)
@@ -241,6 +267,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Attack01.started -= instance.OnAttack01;
+            @Attack01.performed -= instance.OnAttack01;
+            @Attack01.canceled -= instance.OnAttack01;
         }
 
         public void RemoveCallbacks(IKeybordActions instance)
@@ -325,6 +354,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IKeybordActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAttack01(InputAction.CallbackContext context);
     }
     public interface IPadActions
     {

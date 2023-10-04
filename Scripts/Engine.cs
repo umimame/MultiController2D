@@ -15,7 +15,6 @@ using UnityEngine.UIElements;
     [field: SerializeField] public float time { get; set; }
     private float angle;
     private float difference;
-    [SerializeField] private GameObject lookTarget;
 
     private void Start()
     {
@@ -54,7 +53,7 @@ using UnityEngine.UIElements;
         Debug.Log("Minus");
     }
 
-    public void LookAtObject(Vector3 obj)
+    public void LookAtVec(Vector3 obj)
     {
         transform.rotation = Quaternion.LookRotation(Vector3.forward, obj - transform.position);
     }

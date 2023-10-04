@@ -17,14 +17,8 @@ public class Pad : PlayerController
         circleClamp.moveObject.transform.position = transform.position;
         circleClamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
         circleClamp.Limit();
-        engine.LookAtObject(circleClamp.moveObject.transform.position);
 
-        if(beforeVec != new Vector2(0, 0) && Move != new Vector2(0, 0))
-        {
-            engine.LookAtObject(Move);
-        }
-            beforeVec = Move;
-        
+        LookAtMovingDirection();
     }
 
     protected override void InputToVelocity()
@@ -33,8 +27,26 @@ public class Pad : PlayerController
         engine.velocityPlan += Move * speed.entity;
     }
 
-    public Vector2 Move
+    /// <summary>
+    /// 動いている方向を向く
+    /// </summary>
+    public void LookAtMovingDirection()
+    {
+
+        // 移動の入力がある場合のみ方向を変更する
+        if (beforeVec != new Vector2(0, 0) && Move != new Vector2(0, 0))
+        {
+            engine.LookAtVec(circleClamp.moveObject.transform.position);
+        }
+        beforeVec = Move;
+    }
+
+    /// <summary>
+    /// keyMap.Padの省略プロパティ
+    /// </summary>
+    protected override Vector2 Move
     {
         get { return keyMap.Pad.Move.ReadValue<Vector2>(); }
     }
+
 }
