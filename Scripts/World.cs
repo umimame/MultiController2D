@@ -95,6 +95,9 @@ public class KeyMapCallBack
     }
 }
 
+/// <summary>
+/// ä‘äuêßå‰ÉNÉâÉX
+/// </summary>
 [Serializable] public class Interval
 {
     [field: SerializeField] public bool active { get; private set; }

@@ -38,12 +38,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Attack01"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""a626169c-cd94-413c-9908-b185d68edcca"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -108,7 +108,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Attack01"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

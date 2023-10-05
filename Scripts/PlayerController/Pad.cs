@@ -34,7 +34,7 @@ public class Pad : PlayerController
     {
 
         // 移動の入力がある場合のみ方向を変更する
-        if (beforeVec != new Vector2(0, 0) && Move != new Vector2(0, 0))
+        if (beforeVec != new Vector2(0, 0) && Move != new Vector3(0, 0))
         {
             engine.LookAtVec(circleClamp.moveObject.transform.position);
         }
@@ -44,7 +44,7 @@ public class Pad : PlayerController
     /// <summary>
     /// keyMap.Padの省略プロパティ
     /// </summary>
-    protected override Vector2 Move
+    protected override Vector3 Move
     {
         get { return keyMap.Pad.Move.ReadValue<Vector2>(); }
     }

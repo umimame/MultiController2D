@@ -29,21 +29,37 @@ public class Status
 }
 
 
+/// <summary>
+/// Playerオブジェクトや敵オブジェクト、弾丸などに使用
+/// </summary>
 public class Chara : MonoBehaviour
 {
     [field: SerializeField] public Parameter hp { get; set; }
     [field: SerializeField] public Parameter speed { get; set; }
     [field: SerializeField] public Engine engine { get; set; }
+    [field: SerializeField] public Vector2 targetPos { get; set; }
     protected virtual void Start()
     {
+        hp.Initialize();
         speed.Initialize();
-        engine = GetComponent<Engine>();
     }
 
+    /// <summary>
+    /// velocityのリセット<br/>
+    /// 継承先で追記
+    /// </summary>
     protected virtual void Update()
     {
         engine.velocityPlan = new Vector2(0.0f, 0.0f);
+    }
 
+    /// <summary>
+    /// 死亡時の挙動<br/>
+    /// 継承先で上書き
+    /// </summary>
+    protected virtual void Death()
+    {
+        Destroy(gameObject);
     }
 
 }

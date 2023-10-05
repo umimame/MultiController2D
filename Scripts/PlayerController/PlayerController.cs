@@ -44,7 +44,9 @@ public class PlayerController : Chara
             Debug.Log(device);
         }
     }
-    
+    /// <summary>
+    /// Œp³æ‚Åoverride‚µ‚Äg‚¤
+    /// </summary>
     protected virtual void InputToVelocity()
     {
         // Œp³æ‚Åoverride‚µ‚Äg‚¤
@@ -58,25 +60,8 @@ public class PlayerController : Chara
     /// <summary>
     /// ˆÚ“®‚Ì“ü—Í
     /// </summary>
-    protected virtual Vector2 Move
+    protected virtual Vector3 Move
     {
-        get { return Vector2.zero; }
+        get { return Vector3.zero; }
     }
-
-    //private void KeyMapAdd()
-    //{
-    //    keyMap.Keybord.Move.started += OnMove;
-    //    keyMap.Keybord.Move.performed += OnMove;
-    //    keyMap.Keybord.Move.canceled += OnMove;
-
-    //    keyMap.Pad.Move.started += OnMove;
-    //    keyMap.Pad.Move.performed += OnMove;
-    //    keyMap.Pad.Move.canceled += OnMove;
-
-    //}
-
-    //public void OnMove(InputAction.CallbackContext value)
-    //{
-    //    engine.velocityPlan += value.ReadValue<Vector2>().normalized * speed.entity;
-    //}
 }
