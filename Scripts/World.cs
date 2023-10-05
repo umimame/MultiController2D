@@ -69,7 +69,9 @@ public class KeyMapCallBack
         }
     }
 }
-
+/// <summary>
+/// 移動範囲を円形に制限
+/// </summary>
 [Serializable] public class CircleClamp
 {
 
@@ -93,21 +95,53 @@ public class KeyMapCallBack
     }
 }
 
-[Serializable] public class VectorSave
+[Serializable] public class Interval
 {
-    [SerializeField] private Vector3 beforeVec;
+    [field: SerializeField] public bool active { get; private set; }
+    [SerializeField] private float interval;
+    [SerializeField] private float time;
 
-    VectorSave()
+    /// <summary>
+    /// 引数には最初から使用できるかどうかを記述する
+    /// </summary>
+    /// <param name="start"></param>
+    public void Initialize(bool start)
     {
-        beforeVec = Vector3.zero;
+        if(start == true)
+        {
+            time = interval;
+        }
+        else
+        {
+            time = 0.0f;
+        }
+        active = (time >= interval) ? true : false;
     }
 
-    public bool Moving()
+    public void Update()
     {
-        if(beforeVec == new Vector3(0.0f, 0.0f, 0.0f))
+        time += Time.deltaTime;
+        if(time >= interval)
         {
-            return false;
+            active = true;
         }
-        return true;
+        else
+        {
+            active = false;
+        }
+    }
+
+    public void Launch(Action action)
+    {
+        if(active == true)
+        {
+
+            action();
+        }
+    }
+
+    public void Reset()
+    {
+        time = 0.0f;
     }
 }

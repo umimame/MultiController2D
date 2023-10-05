@@ -55,6 +55,14 @@ public class PlayerController : Chara
         get { return true; }
     }
 
+    /// <summary>
+    /// ˆÚ“®‚Ì“ü—Í
+    /// </summary>
+    protected virtual Vector2 Move
+    {
+        get { return Vector2.zero; }
+    }
+
     //private void KeyMapAdd()
     //{
     //    keyMap.Keybord.Move.started += OnMove;
