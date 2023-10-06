@@ -31,6 +31,7 @@ public class BulletGenerator : MonoBehaviour
         Bullet bulletScript = clone.GetComponent<Bullet>();
         clone.transform.rotation = parent.transform.rotation;
         clone.transform.position = parent.transform.rotation * offset + parent.transform.position;
+        clone.tag = parent.tag; // ’e‚ÌTag‚ðparent‚Æ“¯‚¶‚É‚·‚é
         rate.Reset();
     }
 }

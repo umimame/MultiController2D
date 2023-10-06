@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3869689482644612896}
   - component: {fileID: 9036284913367229757}
   m_Layer: 0
-  m_Name: Bullet_01ByHatakeyama
+  m_Name: Bullet_UneUne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

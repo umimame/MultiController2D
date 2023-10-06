@@ -55,7 +55,7 @@ public class Chara : MonoBehaviour
 
     /// <summary>
     /// €–S‚Ì‹““®<br/>
-    /// Œp³æ‚Åã‘‚«
+    /// Œp³æ‚Å’Ç‹L
     /// </summary>
     protected virtual void Death()
     {
