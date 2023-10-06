@@ -28,10 +28,11 @@ public class BulletGenerator : MonoBehaviour
     public virtual void Generate()
     {
         GameObject clone = Instantiate(bullet);
-        Bullet bulletScript = clone.GetComponent<Bullet>();
-        clone.transform.rotation = parent.transform.rotation;
+        Bullet cloneScript = clone.GetComponent<Bullet>();
+        cloneScript.engine.transform.rotation = parent.transform.rotation;
         clone.transform.position = parent.transform.rotation * offset + parent.transform.position;
         clone.tag = parent.tag; // ’e‚ÌTag‚ðparent‚Æ“¯‚¶‚É‚·‚é
+        cloneScript.engine.transform.tag = parent.tag;
         rate.Reset();
     }
 }

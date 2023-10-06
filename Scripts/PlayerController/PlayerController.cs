@@ -12,6 +12,7 @@ public class PlayerController : Chara
     [field: SerializeField] public Vector2 beforeVec { get; set; }
     public KeyMap keyMap { get; private set; }
     [SerializeField] private PlayerInput input;
+    [SerializeField] private CircleClamp clamp;
     protected override void Start()
     {
         base.Start();
@@ -19,16 +20,21 @@ public class PlayerController : Chara
         keyMap.Enable();
         DeviceSeach();
         beforeVec = Vector3.zero;
+        clamp.Initialize();
+    }
+
+    /// <summary>
+    /// overrideå„ÇÃUpdateÇÃç≈èâÇ…ãLèq
+    /// </summary>
+    protected override void HeadUpdate()
+    {
+        base.HeadUpdate();
+        InputToVelocity();
     }
 
     protected override void Update()
     {
         base.Update();
-        InputToVelocity();
-
-        engine.VelocityResult();
-
-
     }
 
     private void DeviceSeach()

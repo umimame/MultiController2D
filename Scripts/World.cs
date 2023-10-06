@@ -77,13 +77,11 @@ public class KeyMapCallBack
 {
 
     [SerializeField] private GameObject center;
-    [SerializeField] private GameObject circle;
-    public GameObject moveObject { get; set; }
+    [field: SerializeField] public GameObject moveObject { get; set; }
     [SerializeField] private float radius;
 
     public void Initialize()
     {
-        moveObject = GameObject.Instantiate(circle);
         moveObject.transform.position = center.transform.position;
     }
     public void Limit()

@@ -48,9 +48,31 @@ public class Chara : MonoBehaviour
     /// velocityのリセット<br/>
     /// 継承先で追記
     /// </summary>
-    protected virtual void Update()
+    protected virtual void HeadUpdate()
     {
         engine.velocityPlan = new Vector2(0.0f, 0.0f);
+
+
+    }
+    /// <summary>
+    /// HeadUpdateとLastUpdateの間<br\>
+    /// 継承先で主に追記
+    /// </summary>
+    protected virtual void MiddleUpdate()
+    {
+
+    }
+
+    protected virtual void LastUpdate()
+    {
+        engine.VelocityResult();
+    }
+    protected virtual void Update()
+    {
+        HeadUpdate();
+        MiddleUpdate();
+        LastUpdate();
+
     }
 
     /// <summary>
