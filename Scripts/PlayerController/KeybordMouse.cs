@@ -13,6 +13,10 @@ public class KeybordMouse : PlayerController
         hunger.Initialize();
     }
 
+    protected override void MiddleUpdate()
+    {
+        base.MiddleUpdate();
+    }
     protected override void Update()
     {
         base.Update();

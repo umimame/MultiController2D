@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 /// <summary>
-/// オブジェクトを動かす基本クラス
+/// オブジェクトを動かす基本クラス<br\>
+/// それぞれインスペクタから必要なコンポーネントをアタッチする
 /// </summary>
 
 [Serializable] public class Engine : MonoBehaviour
@@ -36,7 +37,7 @@ using UnityEngine.UIElements;
     }
 
     /// <summary>
-    /// アタッチしたオブジェクトのUpdatenoの最後に呼ぶ
+    /// アタッチしたオブジェクトのUpdateの最後に呼ぶ
     /// </summary>
     public void VelocityResult()
     {
