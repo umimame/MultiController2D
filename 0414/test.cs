@@ -9,14 +9,14 @@ public class test : MonoBehaviour
     public float time;
     public int GenNum;
 
-    private List<Transform> targets; // 複数のターゲット
+    public List<Transform> targets; // 複数のターゲット
 
     // Start is called before the first frame update
     void Start()
     {
         GenSpan = 3;
         time = 0;
-        GenNum = 3;
+        GenNum = 5;
 
         // ターゲットの初期化
         targets = new List<Transform>();
@@ -26,17 +26,16 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Update");
         time += Time.deltaTime;
-        //Debug.Log(time);
+
         if (time >= GenSpan)
         {
             for (int i = 0; i < GenNum; i++)
             {
-                // 最も近いターゲットを取得
-                Transform closestTarget = GetClosestTarget();
+                // ランダムにターゲットを選択
+                Transform randomTarget = GetRandomTarget();
 
-                if (closestTarget != null)
+                if (randomTarget != null)
                 {
                     float xPlus = Random.Range(15.0f, 30.0f);
                     float xMinus = Random.Range(-15.0f, -30.0f);
@@ -45,11 +44,11 @@ public class test : MonoBehaviour
 
                     // ターゲットの位置に敵を生成
                     GameObject enemy = Instantiate(EnemyPrefab);
-                    enemy.transform.position = new Vector3(closestTarget.position.x + (RL == 0 ? xMinus : xPlus),
-                        closestTarget.position.y + y, 0);
+                    enemy.transform.position = new Vector3(randomTarget.position.x + (RL == 0 ? xMinus : xPlus),
+                        randomTarget.position.y + y, 0);
 
                     // 生成した敵のターゲットを設定
-                    enemy.GetComponent<enemytest>().SetTarget(closestTarget);
+                    enemy.GetComponent<enemytest>().SetTarget(randomTarget);
                 }
             }
 
@@ -57,7 +56,6 @@ public class test : MonoBehaviour
             time = 0f;
         }
     }
-
 
     [ContextMenu("Assign Players as Targets")]
     private void AssignPlayersAsTargets()
@@ -73,26 +71,15 @@ public class test : MonoBehaviour
         }
     }
 
-    // 最も近いターゲットを取得する
-    private Transform GetClosestTarget()
+    // ランダムにターゲットを選択する
+    private Transform GetRandomTarget()
     {
         if (targets.Count == 0)
             return null;
 
-        Transform closestTarget = null;
-        float closestDistance = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
+        // ランダムにインデックスを選択
+        int randomIndex = Random.Range(0, targets.Count);
 
-        foreach (Transform target in targets)
-        {
-            float distanceToTarget = Vector3.Distance(currentPosition, target.position);
-            if (distanceToTarget < closestDistance)
-            {
-                closestTarget = target;
-                closestDistance = distanceToTarget;
-            }
-        }
-
-        return closestTarget;
+        return targets[randomIndex];
     }
 }
