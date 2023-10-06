@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 280027547}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player02
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 898172485}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Player
+  m_TagString: Player01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,6 +1172,10 @@ PrefabInstance:
       value: BulletGenerator_Useful
       objectReference: {fileID: 0}
     - target: {fileID: 6376758783789510261, guid: b14f079785dd1b34fac5e88769a56d9c, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 5151304294359135866, guid: c64f7f7c295925947b85b7aa2478a1ee, type: 3}
+    - target: {fileID: 6376758783789510261, guid: b14f079785dd1b34fac5e88769a56d9c, type: 3}
       propertyPath: parent
       value: 
       objectReference: {fileID: 898172474}
@@ -1181,7 +1185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376758783789510261, guid: b14f079785dd1b34fac5e88769a56d9c, type: 3}
       propertyPath: <offset>k__BackingField.y
-      value: 1.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -127,6 +127,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack01"",
+                    ""type"": ""Button"",
+                    ""id"": ""a54c6100-5a33-4ee0-8789-55133ebcd91e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -138,6 +147,17 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Pad"",
                     ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1b2fdc46-10a2-4358-8608-f7b258a65ff0"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack01"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -176,6 +196,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         // Pad
         m_Pad = asset.FindActionMap("Pad", throwIfNotFound: true);
         m_Pad_Move = m_Pad.FindAction("Move", throwIfNotFound: true);
+        m_Pad_Attack01 = m_Pad.FindAction("Attack01", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -292,11 +313,13 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Pad;
     private List<IPadActions> m_PadActionsCallbackInterfaces = new List<IPadActions>();
     private readonly InputAction m_Pad_Move;
+    private readonly InputAction m_Pad_Attack01;
     public struct PadActions
     {
         private @KeyMap m_Wrapper;
         public PadActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Pad_Move;
+        public InputAction @Attack01 => m_Wrapper.m_Pad_Attack01;
         public InputActionMap Get() { return m_Wrapper.m_Pad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -309,6 +332,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Attack01.started += instance.OnAttack01;
+            @Attack01.performed += instance.OnAttack01;
+            @Attack01.canceled += instance.OnAttack01;
         }
 
         private void UnregisterCallbacks(IPadActions instance)
@@ -316,6 +342,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Attack01.started -= instance.OnAttack01;
+            @Attack01.performed -= instance.OnAttack01;
+            @Attack01.canceled -= instance.OnAttack01;
         }
 
         public void RemoveCallbacks(IPadActions instance)
@@ -359,5 +388,6 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     public interface IPadActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnAttack01(InputAction.CallbackContext context);
     }
 }
