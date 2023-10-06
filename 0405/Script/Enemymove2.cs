@@ -47,6 +47,10 @@ public class Enemymove2 : MonoBehaviour
         {
             rb.velocity = Vector2.zero;  // プレイヤーが検知範囲外にいる場合は停止
         }
+        if (Input.GetKey("e"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Shoot(Transform targetPlayer)
