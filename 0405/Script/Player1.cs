@@ -2,47 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     private float speed = 0.01f;
-    
-    private SpriteRenderer renderer;
-    
 
     void Start()
     {
-        
-        renderer = GetComponent<SpriteRenderer>();
-        
     }
 
     void Update()
     {
         Vector2 position = transform.position;
 
-        if (Input.GetKey("left"))
+        if (Input.GetKey("a"))
         {
             position.x -= speed;
-            
-            renderer.flipX = false;
-            
         }
-        else if (Input.GetKey("right"))
+        else if (Input.GetKey("d"))
         {
             position.x += speed;
-            
-            renderer.flipX = true;
-     
         }
-        else if (Input.GetKey("up"))
+        else if (Input.GetKey("w"))
         {
             position.y += speed;
         }
-        else if (Input.GetKey("down"))
+        else if (Input.GetKey("s"))
         {
             position.y -= speed;
         }
 
         transform.position = position;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy_Bullet"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
