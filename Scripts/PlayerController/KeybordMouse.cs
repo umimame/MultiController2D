@@ -5,29 +5,53 @@ using UnityEngine;
 
 public class KeybordMouse : PlayerController
 {
-    [SerializeField] private GameObject aimCircle;
-    [SerializeField] private Hunger hunger;
+
     protected override void Start()
     {
         base.Start();
-        hunger.Initialize();
+        
+    }
+
+    protected override void HeadUpdate()
+    {
+        base.HeadUpdate();
     }
 
     protected override void MiddleUpdate()
     {
         base.MiddleUpdate();
-    }
-    protected override void Update()
-    {
-        base.Update();
-        engine.LookAtVec(aimCircle.transform.position);
-        targetPos = (aimCircle.transform.position - transform.position).normalized;
-        hunger.inUse.trigger = Convert.ToBoolean(Attack01);
+        clamp.moveObject.transform.position = AddFunction.CameraToMouse();
     }
 
-    protected override void InputToVelocity()
+    protected override void Update()
     {
-        base.InputToVelocity();
+        if (hp.entity <= 0) { state = State.Death; }
+
+        switch (state)
+        {
+            case State.Spawn:
+                state = State.Idol;
+                break;
+            case State.Idol:
+                base.Update();
+                break;
+            case State.Death:
+                Death();
+                break;
+        }
+    }
+
+    protected override void LastUpdate()
+    {
+        base.LastUpdate();
+        engine.LookAtVec(clamp.moveObject.transform.position);
+        targetPos = (clamp.moveObject.transform.position - transform.position).normalized;
+        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
+    }
+
+    protected override void InputToVelocityPlan()
+    {
+        base.InputToVelocityPlan();
         engine.velocityPlan += Move;
     }
 
@@ -35,8 +59,9 @@ public class KeybordMouse : PlayerController
     {
         get { return keyMap.Keybord.Move.ReadValue<Vector2>().normalized * speed.entity; }
     }
-    public float Attack01
+    protected override float Attack1
     {
-        get { return keyMap.Keybord.Attack01.ReadValue<float>(); }
+        get { return keyMap.Keybord.Attack1.ReadValue<float>(); }
     }
+
 }

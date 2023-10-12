@@ -7,10 +7,11 @@ using UnityEngine.InputSystem;
 public class World : MonoBehaviour
 {
     public static KeyMapCallBack keyMap;
-
+    public static int controllerType;
     private void Start()
     {
         keyMap = new KeyMapCallBack();
+        controllerType = 2;
     }
 }
 
@@ -36,7 +37,10 @@ public static class AddFunction
         return angle;
     }
 
-
+    public static Vector3 CameraToMouse()
+    {
+        return new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0.0f);
+    }
 }
 
 public class KeyMapCallBack
@@ -133,6 +137,10 @@ public class KeyMapCallBack
         }
     }
 
+    /// <summary>
+    /// 引数は「引数無しのメソッド」
+    /// </summary>
+    /// <param name="action"></param>
     public void Launch(Action action)
     {
         if(active == true)

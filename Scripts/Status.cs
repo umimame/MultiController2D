@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable] // Inspectorに表示
-public class Status
-{
-
-}
-
 /// <summary>
 /// パラメータ<br/>
 /// entity:実際の数値<br/>
@@ -34,6 +28,15 @@ public class Status
 /// </summary>
 public class Chara : MonoBehaviour
 {
+    public enum State
+    {
+        Spawn,
+        Idol,
+        Death,
+        Non,
+    }
+
+    [field: SerializeField] public State state { get; set; }
     [field: SerializeField] public Parameter hp { get; set; }
     [field: SerializeField] public Parameter speed { get; set; }
     [field: SerializeField] public Engine engine { get; set; }
@@ -42,6 +45,7 @@ public class Chara : MonoBehaviour
     {
         hp.Initialize();
         speed.Initialize();
+        state = State.Spawn;
     }
 
     /// <summary>
@@ -55,7 +59,7 @@ public class Chara : MonoBehaviour
 
     }
     /// <summary>
-    /// HeadUpdateとLastUpdateの間<br\>
+    /// HeadUpdateとLastUpdateの間<br/>
     /// 継承先で主に追記
     /// </summary>
     protected virtual void MiddleUpdate()
@@ -63,6 +67,11 @@ public class Chara : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// Updateの最後<br/>
+    /// 継承先で追記
+    /// </summary>
     protected virtual void LastUpdate()
     {
         engine.VelocityResult();

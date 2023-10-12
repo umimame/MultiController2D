@@ -1,29 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pad : PlayerController
 {
-    [SerializeField] CircleClamp circleClamp;
     protected override void Start()
     {
         base.Start();
-        circleClamp.Initialize();
+    }
+
+
+    protected override void HeadUpdate()
+    {
+        base.HeadUpdate();
+    }
+
+    protected override void MiddleUpdate()
+    {
+        base.MiddleUpdate();
+        clamp.moveObject.transform.position = transform.position;
+        clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
+    }
+
+    protected override void LastUpdate()
+    {
+        base.LastUpdate();
+        LookAtMovingDirection();
+        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void Update()
     {
-        base.Update();
-        circleClamp.moveObject.transform.position = transform.position;
-        circleClamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
-        circleClamp.Limit();
+        if (hp.entity <= 0) { state = State.Death; }
 
-        LookAtMovingDirection();
+        switch (state)
+        {
+            case State.Spawn:
+                state = State.Idol;
+                break;
+            case State.Idol:
+                base.Update();
+                break;
+            case State.Death:
+                Death();
+                break;
+        }
     }
 
-    protected override void InputToVelocity()
+    protected override void InputToVelocityPlan()
     {
-        base.InputToVelocity();
+        base.InputToVelocityPlan();
         engine.velocityPlan += Move * speed.entity;
     }
 
@@ -36,7 +63,7 @@ public class Pad : PlayerController
         // ˆÚ“®‚Ì“ü—Í‚ª‚ ‚éê‡‚Ì‚Ý•ûŒü‚ð•ÏX‚·‚é
         if (beforeVec != new Vector2(0, 0) && Move != new Vector3(0, 0))
         {
-            engine.LookAtVec(circleClamp.moveObject.transform.position);
+            engine.LookAtVec(clamp.moveObject.transform.position);
         }
         beforeVec = Move;
     }
@@ -47,6 +74,11 @@ public class Pad : PlayerController
     protected override Vector3 Move
     {
         get { return keyMap.Pad.Move.ReadValue<Vector2>(); }
+    }
+
+    protected override float Attack1
+    {
+        get { return keyMap.Pad.Attack1.ReadValue<float>(); }
     }
 
 }
