@@ -1,19 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Presets;
 using UnityEngine;
 
-public class BulletGenerator : MonoBehaviour
+[CreateAssetMenu(fileName = "Generator", menuName = "ScriptableObject/Generator")]
+[Serializable]
+public class Generator : ScriptableObject
 {
+
     [field: SerializeField] public bool trigger { get; set; }
     [SerializeField] private GameObject bullet;
     [SerializeField] private Interval rate;
     [field: SerializeField] public Vector3 offset { get; set; }
-    [SerializeField] private GameObject parent;
+    [field: SerializeField] public GameObject parent { get; set; }
+    [field: SerializeField] public PlayerTypePresets<Vector3> offsets { get; set; }
 
-    public virtual void Start()
+    public virtual void Initialize()
     {
         rate.Initialize(true);
+        offsets.Initialize();
     }
 
     public virtual void Update()
@@ -40,6 +46,3 @@ public class BulletGenerator : MonoBehaviour
         rate.Reset();
     }
 }
-
-
-
