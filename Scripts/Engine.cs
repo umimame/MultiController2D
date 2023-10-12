@@ -9,7 +9,6 @@ using UnityEngine.UIElements;
 /// オブジェクトを動かす基本クラス<br\>
 /// それぞれインスペクタから必要なコンポーネントをアタッチする
 /// </summary>
-
 [Serializable] public class Engine : MonoBehaviour
 {
     [field: SerializeField] public Rigidbody2D rb { get; set; }

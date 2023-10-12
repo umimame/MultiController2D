@@ -25,6 +25,10 @@ public class BulletGenerator : MonoBehaviour
 
         rate.Update();
     }
+
+    /// <summary>
+    /// bulletの生成と位置・タグ補正
+    /// </summary>
     public virtual void Generate()
     {
         GameObject clone = Instantiate(bullet);
@@ -37,23 +41,44 @@ public class BulletGenerator : MonoBehaviour
     }
 }
 
-[Serializable] public class Hunger
-{
-    [field: SerializeField] public BulletGenerator inUse { get; set; }
-    [field: SerializeField] private List<BulletGenerator> generators { get; set; } = new List<BulletGenerator>();
 
-    public void Initialize()
+
+[CreateAssetMenu(fileName = "Generator", menuName = "ScriptableObject/Generator")]
+[Serializable] public class Generator : ScriptableObject
+{
+
+    [field: SerializeField] public bool trigger { get; set; }
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Interval rate;
+    [field: SerializeField] public Vector3 offset { get; set; }
+    [field: SerializeField] public GameObject parent { get; set; }
+
+    public virtual void Initialize()
     {
-        foreach(BulletGenerator generator in generators)
-        {
-        }
+        rate.Initialize(true);
     }
 
-    public void Update()
+    public virtual void Update()
     {
-        foreach (BulletGenerator generator in generators)
+        if (trigger == true)
         {
-            generator.Update();
+            rate.Launch(Generate);
         }
+
+        rate.Update();
+    }
+
+    /// <summary>
+    /// bulletの生成と位置・タグ補正
+    /// </summary>
+    public virtual void Generate()
+    {
+        GameObject clone = Instantiate(bullet);
+        Bullet cloneScript = clone.GetComponent<Bullet>();
+        cloneScript.engine.transform.rotation = parent.transform.rotation;
+        clone.transform.position = parent.transform.rotation * offset + parent.transform.position;
+        clone.tag = parent.tag; // 弾のTagをparentと同じにする
+        cloneScript.engine.transform.tag = parent.tag;
+        rate.Reset();
     }
 }
