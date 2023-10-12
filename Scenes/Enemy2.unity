@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.47
+      value: -16.26
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.56
+      value: 16.3
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -396,9 +396,10 @@ GameObject:
   - component: {fileID: 898172475}
   - component: {fileID: 898172478}
   - component: {fileID: 898172479}
+  - component: {fileID: 898172480}
   m_Layer: 0
   m_Name: player
-  m_TagString: Player1
+  m_TagString: Player01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -554,6 +555,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.47631824, y: 0.5461426}
   m_EdgeRadius: 0
+--- !u!114 &898172480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898172474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac01cd10de65c2499414b0baf6ad7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 9177307113449631735, guid: 93f220dbdc8f7984186f62aee1633927, type: 3}
 --- !u!1001 &1276883948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -636,9 +650,10 @@ GameObject:
   - component: {fileID: 1646067672}
   - component: {fileID: 1646067676}
   - component: {fileID: 1646067675}
+  - component: {fileID: 1646067677}
   m_Layer: 0
   m_Name: player2
-  m_TagString: Player2
+  m_TagString: Player02
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,6 +809,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1646067677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1646067671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac01cd10de65c2499414b0baf6ad7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 524026132575036068, guid: ccb00a5b29401454c81ca5f8d94f69ad, type: 3}
 --- !u!1001 &1670933093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -816,7 +844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.44
+      value: -7.48
       objectReference: {fileID: 0}
     - target: {fileID: 827087284353915258, guid: c9106eb3369b3ff4193e02497f362e2f, type: 3}
       propertyPath: m_LocalPosition.z

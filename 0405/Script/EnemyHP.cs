@@ -13,13 +13,19 @@ public class EnemyHP : MonoBehaviour
         currentHP = maxHP;
     }
 
-   public void TagJudge()
-   {
-        if (bullet.CompareTag("Player01"))
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player_Bullet01"))
         {
-            //Bullet clone = bullet.GetComponent<Bullet>();
-
-            //currentHP -= clone.pow.entity
+            
+            Destroy(other.gameObject);
+            //currentHP -= clone.pow.entity;
         }
-   }
+        if (other.gameObject.CompareTag("Player_Bullet02"))
+        {
+           
+            Destroy(other.gameObject);
+            //currentHP -= clone.pow.entity;
+        }
+    }
 }
