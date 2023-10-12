@@ -18,8 +18,8 @@ public class enemytest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //speed = Random.Range(10.0f, 30.0f);
-        speed = 10.0f;
+        speed = Random.Range(10.0f, 30.0f);
+        //speed = 20.0f;
         hp = 10;
         MoveSE();
         enemyParticle = GetComponent<EnemyParticle>();
