@@ -14,9 +14,9 @@ public class test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenSpan = 3;
+        GenSpan = 5;
         time = 0;
-        GenNum = 5;
+        GenNum = 20;
 
         // ターゲットの初期化
         targets = new List<Transform>();
