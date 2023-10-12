@@ -8,24 +8,21 @@ using UnityEngine;
 /// </summary>
 [Serializable] public class Hunger : MonoBehaviour
 {
-    [field: SerializeField] public Generator inUse { get; set; }
-    [field: SerializeField] private List<BulletGenerator> bGenerators { get; set; } = new List<BulletGenerator>();
-    [field: SerializeField] private List<Generator> generators { get; set; } = new List<Generator>();
+    [field: SerializeField] public BulletGenerator inUse { get; set; }
+    [field: SerializeField] private List<BulletGenerator> generators { get; set; } = new List<BulletGenerator>();
 
     public void Start()
     {
-        foreach (Generator generator in generators)
+        foreach (BulletGenerator generator in generators)
         {
-            generator.Initialize();
-            generator.parent = gameObject;
         }
+        inUse = generators[0];
     }
 
     public void Update()
     {
-        foreach (Generator generator in generators)
+        foreach (BulletGenerator generator in generators)
         {
-            generator.Update();
         }
     }
 }

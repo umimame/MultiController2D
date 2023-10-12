@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -95,6 +96,19 @@ public class KeyMapCallBack
             Vector3 nor = moveObject.transform.position - center.transform.position;
             moveObject.transform.position = center.transform.position + nor.normalized * radius;
         }
+    }
+}
+
+
+[Serializable] public class PlayerTypePresets<T>
+{
+    [SerializeField] private int playerType;
+    [SerializeField] private List<T> presets;
+    [ContextMenu("PresetsResize")]
+    public void Initialize()
+    {
+        playerType = World.controllerType;
+        presets = new List<T>(playerType);
     }
 }
 
