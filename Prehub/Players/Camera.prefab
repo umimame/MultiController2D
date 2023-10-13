@@ -97,19 +97,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 0}
-  camPreset1:
-    rect:
-      serializedVersion: 2
-      x: 0
-      y: 0.505
-      width: 1
-      height: 0.5
-    backGroundColor: {r: 0.35686275, g: 0.023529412, b: 0.08627451, a: 0}
-  camPreset2:
-    rect:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1
-      height: 0.495
-    backGroundColor: {r: 0.023529412, g: 0.21176471, b: 0.35686275, a: 0}
+  camPre:
+    playerType: 2
+    <presets>k__BackingField:
+    - rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.505
+        width: 1
+        height: 0.5
+      backGroundColor: {r: 0.35686275, g: 0.023529412, b: 0.08627451, a: 0}
+    - rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1
+        height: 0.495
+      backGroundColor: {r: 0.023529412, g: 0.21176471, b: 0.35686275, a: 0}

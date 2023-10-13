@@ -15,6 +15,11 @@ public class PlayerController : Chara
     [SerializeField] private PlayerInput input;
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
+    private void Awake()
+    {
+        transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
+
+    }
     protected override void Start()
     {
         base.Start();
@@ -32,7 +37,6 @@ public class PlayerController : Chara
     protected override void HeadUpdate()
     {
         base.HeadUpdate();
-        transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
         InputToVelocityPlan();
     }
 
@@ -112,5 +116,12 @@ public class PlayerController : Chara
     protected virtual float Attack1
     {
         get { return keyMap.Keybord.Attack1.ReadValue<float>(); }
+    }
+
+    public void ColorChange(Color color)
+    {
+        engine.sprite.color = color;
+        engine.aimCircle.color = new Color(color.r, color.g, color.b, 0.5f);
+        
     }
 }

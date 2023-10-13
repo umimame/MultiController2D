@@ -10,8 +10,7 @@ public class CameraByPlayer : MonoBehaviour
 {
     [SerializeField] private Chara body;
     private Camera cam;
-    [SerializeField] private CameraPreset camPreset1;
-    [SerializeField] private CameraPreset camPreset2;
+    [SerializeField] private PresetByPlayerType<CameraPreset> camPre;
     private void Start()
     {
 
@@ -24,15 +23,8 @@ public class CameraByPlayer : MonoBehaviour
         }
 
         // 親オブジェクトのタグを基に画面分割
-        switch (transform.parent.tag)
-        {
-            case "Player01":
-                camPreset1.Set(cam);
-                break;
-            case "Player02":
-                camPreset2.Set(cam);
-                break;
-        }
+        cam.backgroundColor = World.instance.presets.colorPre[AddFunction.TagToArray(body.tag)];
+        cam.rect = World.instance.presets.cameraRectPre[AddFunction.TagToArray(body.tag)];
     }
 
     private void Update()
@@ -54,7 +46,6 @@ public class CameraByPlayer : MonoBehaviour
 
     public void Set(Camera cam)
     {
-
         cam.rect = rect;
         cam.backgroundColor = backGroundColor;
     }

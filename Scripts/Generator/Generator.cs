@@ -14,7 +14,7 @@ public class Generator : ScriptableObject
     [SerializeField] private Interval rate;
     [field: SerializeField] public Vector3 offset { get; set; }
     [field: SerializeField] public GameObject parent { get; set; }
-    [field: SerializeField] public PlayerTypePresets<Vector3> offsets { get; set; }
+    [field: SerializeField] public PresetByPlayerType<Vector3> offsets { get; set; }
 
     public virtual void Initialize()
     {

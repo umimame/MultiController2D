@@ -53,6 +53,15 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Hold"",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Debug"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dabb0dc-9da7-4ddd-bdf9-0ed297c0855f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keybord"",
                     ""action"": ""Attack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0cfa3f5-bbd1-4245-a508-25badbda142c"",
+                    ""path"": ""<Keyboard>/f12"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -274,6 +294,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_Keybord_Move = m_Keybord.FindAction("Move", throwIfNotFound: true);
         m_Keybord_Attack1 = m_Keybord.FindAction("Attack1", throwIfNotFound: true);
         m_Keybord_Attack2 = m_Keybord.FindAction("Attack2", throwIfNotFound: true);
+        m_Keybord_Debug = m_Keybord.FindAction("Debug", throwIfNotFound: true);
         // Pad
         m_Pad = asset.FindActionMap("Pad", throwIfNotFound: true);
         m_Pad_Move = m_Pad.FindAction("Move", throwIfNotFound: true);
@@ -345,6 +366,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Keybord_Move;
     private readonly InputAction m_Keybord_Attack1;
     private readonly InputAction m_Keybord_Attack2;
+    private readonly InputAction m_Keybord_Debug;
     public struct KeybordActions
     {
         private @KeyMap m_Wrapper;
@@ -352,6 +374,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Keybord_Move;
         public InputAction @Attack1 => m_Wrapper.m_Keybord_Attack1;
         public InputAction @Attack2 => m_Wrapper.m_Keybord_Attack2;
+        public InputAction @Debug => m_Wrapper.m_Keybord_Debug;
         public InputActionMap Get() { return m_Wrapper.m_Keybord; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -370,6 +393,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Attack2.started += instance.OnAttack2;
             @Attack2.performed += instance.OnAttack2;
             @Attack2.canceled += instance.OnAttack2;
+            @Debug.started += instance.OnDebug;
+            @Debug.performed += instance.OnDebug;
+            @Debug.canceled += instance.OnDebug;
         }
 
         private void UnregisterCallbacks(IKeybordActions instance)
@@ -383,6 +409,9 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             @Attack2.started -= instance.OnAttack2;
             @Attack2.performed -= instance.OnAttack2;
             @Attack2.canceled -= instance.OnAttack2;
+            @Debug.started -= instance.OnDebug;
+            @Debug.performed -= instance.OnDebug;
+            @Debug.canceled -= instance.OnDebug;
         }
 
         public void RemoveCallbacks(IKeybordActions instance)
@@ -501,6 +530,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack1(InputAction.CallbackContext context);
         void OnAttack2(InputAction.CallbackContext context);
+        void OnDebug(InputAction.CallbackContext context);
     }
     public interface IPadActions
     {
