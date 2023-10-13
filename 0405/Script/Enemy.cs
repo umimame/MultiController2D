@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet0405 : MonoBehaviour
+public class Enemy : Chara
 {
-    
+
+
 }
+
