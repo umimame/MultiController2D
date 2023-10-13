@@ -15,6 +15,7 @@ using UnityEngine.UIElements;
     [field: SerializeField] public Vector3 velocityPlan { get; set; }
     [field: SerializeField] public Collider2D coll { get; set; }
     [field: SerializeField] public SpriteRenderer sprite { get; set; }
+    [field: SerializeField] public SpriteRenderer aimCircle { get; set; }
     [field: SerializeField] public float time { get; set; }
     private float angle;
     private float difference;
@@ -24,7 +25,7 @@ using UnityEngine.UIElements;
         rb = GetComponent<Rigidbody2D>();
         velocityPlan = new Vector2(0.0f, 0.0f);
         coll = GetComponent<Collider2D>();
-        sprite = GetComponent<SpriteRenderer>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
         time = 0.0f;
 
         float angle = AddFunction.Vec2ToAngle(velocityPlan.normalized);
