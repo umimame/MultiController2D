@@ -20,7 +20,7 @@ using UnityEngine;
     {
         base.Update();
         time += Time.deltaTime;
-        engine.velocityPlan += transform.rotation * new Vector3(moveX.Evaluate(time), moveY.Evaluate(time)) * speed.entity;
+        engine.velocityPlan += engine.transform.rotation * new Vector3(moveX.Evaluate(time), moveY.Evaluate(time)) * speed.entity;
         engine.VelocityResult();
 
         LifeTimer(Death);
@@ -49,22 +49,7 @@ using UnityEngine;
         }
     }
 
-    private void Hit(Collision2D collision)
-    {
-        if(collision.transform.tag != transform.tag)
-        {
-            Death();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag != engine.transform.tag)
-        {
-            Death();
-        }
-    }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void Hit(Collider2D collision)
     {
         if (collision.transform.tag != engine.transform.tag)
         {
@@ -72,4 +57,12 @@ using UnityEngine;
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Hit(collision);
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Hit(collision);
+    }
 }
