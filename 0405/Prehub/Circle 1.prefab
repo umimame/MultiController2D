@@ -140,8 +140,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   time: 0
   <pow>k__BackingField:
-    <entity>k__BackingField: 0
-    <max>k__BackingField: 0
+    <entity>k__BackingField: 1
+    <max>k__BackingField: 10
   <lifeTime>k__BackingField: 10
 --- !u!114 &1182331755559878374
 MonoBehaviour:

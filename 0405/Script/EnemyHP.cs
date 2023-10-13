@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
-    public int maxHP = 10;
+    public int maxHP = 100;
     public int currentHP;
     GameObject bullet;
+    private object clone;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +19,34 @@ public class EnemyHP : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player_Bullet01"))
         {
-            
             Destroy(other.gameObject);
-            //currentHP -= clone.pow.entity;
         }
         if (other.gameObject.CompareTag("Player_Bullet02"))
-        {
-           
-            Destroy(other.gameObject);
-            //currentHP -= clone.pow.entity;
+        {  
+            Destroy(other.gameObject);   
         }
+    }
+
+    public void TagJudge(GameObject bullet, int pow)
+    {
+        if (bullet.CompareTag("Player_Bullet01"))
+        {
+            transform.GetComponent<Bullet>();
+            currentHP -= pow;
+        }
+        if (bullet.CompareTag("Player_Bullet02"))
+        {
+            transform.GetComponent<Bullet>();
+            currentHP -= pow;
+        }
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
     }
 }
