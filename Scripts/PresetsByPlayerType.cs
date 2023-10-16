@@ -10,7 +10,7 @@ using UnityEngine;
     [field: SerializeField] public List<Color> colorPre { get; set; } = new List<Color>();
     [field: SerializeField] public List<Color> playerColorPre { get; set; } = new List<Color>();
     [field: SerializeField] public List<Rect> cameraRectPre { get; set; } = new List<Rect>();
-
+    [field: SerializeField] public List<Vector2> playerPos { get; set; } = new List<Vector2>();
     public void Initialize()
     {
         playerType = World.instance.PlayerTypes;

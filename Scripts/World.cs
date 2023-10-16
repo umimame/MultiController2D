@@ -33,6 +33,7 @@ public class World : SingletonDontDestroy<World>
     [field: SerializeField] public int playerCount { get; set; }
     [field: SerializeField] public bool timeStop { get; private set; }
     [field: SerializeField] public AlwaysUI debugUI { get; private set; }
+    
 
     protected override void Awake()
     {
@@ -95,7 +96,9 @@ public class World : SingletonDontDestroy<World>
             }
 
             Debug.Log(i);
+
             players[i].tag = AddFunction.ArrayToTag(i);
+            players[i].transform.position = presets.playerPos[i];
             playerController.Add(players[i].GetComponentInChildren<PlayerController>());
             playerController[i].ColorChange(presets.playerColorPre[i]);
         }
@@ -115,6 +118,21 @@ public class World : SingletonDontDestroy<World>
     public int PlayerTypes
     {
         get { return controllerType.Count; }
+    }
+    void OnGUI()
+    {
+        if (Gamepad.current == null) return;
+
+        GUILayout.Label($"leftStick: {Gamepad.current.leftStick.ReadValue()}");
+        GUILayout.Label($"buttonNorth: {Gamepad.current.buttonNorth.isPressed}");
+        GUILayout.Label($"buttonSouth: {Gamepad.current.buttonSouth.isPressed}");
+        GUILayout.Label($"buttonEast: {Gamepad.current.buttonEast.isPressed}");
+        GUILayout.Label($"buttonWest: {Gamepad.current.buttonWest.isPressed}");
+        GUILayout.Label($"leftShoulder: {Gamepad.current.leftShoulder.ReadValue()}");
+        GUILayout.Label($"leftTrigger: {Gamepad.current.leftTrigger.ReadValue()}");
+        GUILayout.Label($"rightShoulder: {Gamepad.current.rightShoulder.ReadValue()}");
+        GUILayout.Label($"rightTrigger: {Gamepad.current.rightTrigger.ReadValue()}");
+
     }
 }
 public class SingletonDontDestroy<T> : MonoBehaviour where T : MonoBehaviour

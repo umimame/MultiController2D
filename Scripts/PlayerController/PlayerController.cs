@@ -23,6 +23,7 @@ public class PlayerController : Chara
     protected override void Start()
     {
         base.Start();
+        transform.tag = transform.parent.tag;
         keyMap = new KeyMap();
         keyMap.Enable();
         DeviceSeach();
@@ -110,8 +111,8 @@ public class PlayerController : Chara
 
     protected override void Death()
     {
-        Destroy(gameObject);
-        Destroy(clamp.moveObject);
+        engine.sprite.enabled = false;
+        engine.aimCircle.enabled = false;
     }
     protected virtual float Attack1
     {
