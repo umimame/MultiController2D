@@ -19,12 +19,6 @@ public class KeybordMouse : PlayerController
 
     protected override void MiddleUpdate()
     {
-        base.MiddleUpdate();
-        clamp.moveObject.transform.position = AddFunction.CameraToMouse();
-    }
-
-    protected override void Update()
-    {
         if (hp.entity <= 0) { state = State.Death; }
 
         switch (state)
@@ -33,7 +27,8 @@ public class KeybordMouse : PlayerController
                 state = State.Idol;
                 break;
             case State.Idol:
-                base.Update();
+                base.MiddleUpdate();
+                clamp.moveObject.transform.position = AddFunction.CameraToMouse();
                 break;
             case State.Death:
                 Death();

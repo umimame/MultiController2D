@@ -18,20 +18,6 @@ public class Pad : PlayerController
 
     protected override void MiddleUpdate()
     {
-        base.MiddleUpdate();
-        clamp.moveObject.transform.position = transform.position;
-        clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
-    }
-
-    protected override void LastUpdate()
-    {
-        base.LastUpdate();
-        LookAtMovingDirection();
-        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
-    }
-
-    protected override void Update()
-    {
         if (hp.entity <= 0) { state = State.Death; }
 
         switch (state)
@@ -40,12 +26,21 @@ public class Pad : PlayerController
                 state = State.Idol;
                 break;
             case State.Idol:
-                base.Update();
+                base.MiddleUpdate();
+                clamp.moveObject.transform.position = transform.position;
+                clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
                 break;
             case State.Death:
                 Death();
                 break;
         }
+    }
+
+    protected override void LastUpdate()
+    {
+        base.LastUpdate();
+        LookAtMovingDirection();
+        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void InputToVelocityPlan()

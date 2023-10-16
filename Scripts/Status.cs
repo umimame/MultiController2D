@@ -60,7 +60,8 @@ public class Chara : MonoBehaviour
     }
     /// <summary>
     /// HeadUpdate‚ÆLastUpdate‚ÌŠÔ<br/>
-    /// Œp³æ‚Åå‚É’Ç‹L
+    /// å‚ÉStateˆ—‚É“ü‚é<br/>
+    /// Œp³æ‚Å’Ç‹L
     /// </summary>
     protected virtual void MiddleUpdate()
     {
