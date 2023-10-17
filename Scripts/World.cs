@@ -33,6 +33,7 @@ public class World : SingletonDontDestroy<World>
     [field: SerializeField] public int playerCount { get; set; }
     [field: SerializeField] public bool timeStop { get; private set; }
     [field: SerializeField] public AlwaysUI debugUI { get; private set; }
+    [SerializeField] private PlayerInputManager inputManager;
     
 
     protected override void Awake()
@@ -78,20 +79,24 @@ public class World : SingletonDontDestroy<World>
 
     private void PlayerInstance()
     {
+        string schema = "";
         for (int i = 0; i < controllerType.Count; ++i)
         {
             switch (controllerType[i])
             {
                 case ControllerType.KeybordMouse:
                     players.Add(Instantiate(player_KeybordMouse));
+                    schema = "Keybord";
                     break;
 
                 case ControllerType.Pad_CardinalDirection:
                     players.Add(Instantiate(player_Pad_CardinalDirectione));
+                    schema = "Pad";
                     break;
 
                 case ControllerType.Pad_DoubleStick:
                     players.Add(Instantiate(player_Pad_DoubleStick));
+                    schema = "Pad";
                     break;
             }
 
@@ -101,6 +106,9 @@ public class World : SingletonDontDestroy<World>
             players[i].transform.position = presets.playerPos[i];
             playerController.Add(players[i].GetComponentInChildren<PlayerController>());
             playerController[i].ColorChange(presets.playerColorPre[i]);
+            Debug.Log(playerController[i].input.currentControlScheme);
+            inputManager.JoinPlayer(i, -1, playerController[i].input.currentControlScheme);
+            //inputManager.JoinPlayerFromAction(playerController[i].keyMap.Pad.Move.started)
         }
     }
 
