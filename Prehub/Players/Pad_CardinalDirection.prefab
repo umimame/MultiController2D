@@ -30,8 +30,8 @@ Transform:
   m_Children:
   - {fileID: 3460462500501832268}
   - {fileID: 2264727850229388525}
-  - {fileID: 5051455367548501807}
   - {fileID: 4632004034259947226}
+  - {fileID: 5051455367548501807}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -211,12 +211,12 @@ MonoBehaviour:
   <engine>k__BackingField: {fileID: 4050311772770890391}
   <targetPos>k__BackingField: {x: 0, y: 0}
   <beforeVec>k__BackingField: {x: 0, y: 0}
-  input: {fileID: 960189323077688926}
+  <input>k__BackingField: {fileID: 960189323077688926}
   <clamp>k__BackingField:
     center: {fileID: 8866056251256395796}
     <moveObject>k__BackingField: {fileID: 4316597584317544789}
     radius: 5
-  <hunger>k__BackingField: {fileID: 0}
+  <hunger>k__BackingField: {fileID: 9171546605326560144}
 --- !u!114 &4050311772770890391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8143427333873420346, guid: ac0507533cf64734c8aa20466113f841, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8143427333873420346, guid: ac0507533cf64734c8aa20466113f841, type: 3}
       propertyPath: m_LocalScale.x
@@ -499,7 +499,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2151266222895465367, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2151266222895465367, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
       propertyPath: m_LocalPosition.x

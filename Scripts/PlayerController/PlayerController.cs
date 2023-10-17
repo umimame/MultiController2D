@@ -12,7 +12,7 @@ public class PlayerController : Chara
 {
     [field: SerializeField] public Vector2 beforeVec { get; set; }
     public KeyMap keyMap { get; private set; }
-    [SerializeField] private PlayerInput input;
+    [field: SerializeField] public PlayerInput input{get; private set; }
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
     private void Awake()

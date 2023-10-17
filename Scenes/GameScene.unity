@@ -160,10 +160,11 @@ MonoBehaviour:
   <player_Pad_CardinalDirectione>k__BackingField: {fileID: 1855463790103458835, guid: 6aaed10bdc7ffe047b13fc7a7d19011c, type: 3}
   <player_Pad_DoubleStick>k__BackingField: {fileID: 0}
   <gameState>k__BackingField: 0
-  <controllerType>k__BackingField: 0100000001000000
+  <controllerType>k__BackingField: 0000000001000000
   <playerCount>k__BackingField: 0
   <timeStop>k__BackingField: 0
   <debugUI>k__BackingField: {fileID: 0}
+  inputManager: {fileID: 553562110}
 --- !u!4 &553562109
 Transform:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 2
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
