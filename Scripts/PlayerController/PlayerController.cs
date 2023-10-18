@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,26 +12,45 @@ public class PlayerController : Chara
 {
     [field: SerializeField] public Vector2 beforeVec { get; set; }
     public KeyMap keyMap { get; private set; }
-    [SerializeField] private PlayerInput input;
+    [field: SerializeField] public PlayerInput input{get; private set; }
+    [field: SerializeField] public CircleClamp clamp { get; set; }
+    [field: SerializeField] public Hunger hunger { get; set; }
+    private void Awake()
+    {
+        transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
+
+    }
     protected override void Start()
     {
         base.Start();
+        transform.tag = transform.parent.tag;
         keyMap = new KeyMap();
         keyMap.Enable();
         DeviceSeach();
         beforeVec = Vector3.zero;
+        clamp.Initialize();
+        hunger = GetComponent<Hunger>();
     }
 
-    protected override void Update()
+    /// <summary>
+    /// override後のUpdateの最初に記述
+    /// </summary>
+    protected override void HeadUpdate()
     {
-        base.Update();
-        InputToVelocity();
-
-        engine.VelocityResult();
-
-
+        base.HeadUpdate();
+        InputToVelocityPlan();
     }
 
+    protected override void MiddleUpdate()
+    {
+        base.MiddleUpdate();
+    }
+
+    protected override void LastUpdate()
+    {
+        base.LastUpdate();
+        clamp.Limit();
+    }
     private void DeviceSeach()
     {
         if (!input.user.valid)
@@ -44,8 +64,10 @@ public class PlayerController : Chara
             Debug.Log(device);
         }
     }
-    
-    protected virtual void InputToVelocity()
+    /// <summary>
+    /// 継承先でoverrideして使う
+    /// </summary>
+    protected virtual void InputToVelocityPlan()
     {
         // 継承先でoverrideして使う
     }
@@ -58,25 +80,49 @@ public class PlayerController : Chara
     /// <summary>
     /// 移動の入力
     /// </summary>
-    protected virtual Vector2 Move
+    protected virtual Vector3 Move
     {
-        get { return Vector2.zero; }
+        get { return Vector3.zero; }
     }
 
-    //private void KeyMapAdd()
-    //{
-    //    keyMap.Keybord.Move.started += OnMove;
-    //    keyMap.Keybord.Move.performed += OnMove;
-    //    keyMap.Keybord.Move.canceled += OnMove;
+    protected virtual void UnderAttack(Collider2D co)
+    {
+        if(co.tag != transform.tag) // 衝突先のタグが自軍と異なる場合
+        {
+            Debug.Log("UnderAttack");
+            if (co.GetComponent<Bullet>())
+            {
+                Bullet coScript = co.GetComponent<Bullet>();
+                hp.entity -= coScript.pow.entity;
+                Debug.Log(hp.entity);
+            }
+        }
+    }
 
-    //    keyMap.Pad.Move.started += OnMove;
-    //    keyMap.Pad.Move.performed += OnMove;
-    //    keyMap.Pad.Move.canceled += OnMove;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        UnderAttack(collision);
+    }
 
-    //}
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        UnderAttack(collision);
+    }
 
-    //public void OnMove(InputAction.CallbackContext value)
-    //{
-    //    engine.velocityPlan += value.ReadValue<Vector2>().normalized * speed.entity;
-    //}
+    protected override void Death()
+    {
+        engine.sprite.enabled = false;
+        engine.aimCircle.enabled = false;
+    }
+    protected virtual float Attack1
+    {
+        get { return keyMap.Keybord.Attack1.ReadValue<float>(); }
+    }
+
+    public void ColorChange(Color color)
+    {
+        engine.sprite.color = color;
+        engine.aimCircle.color = new Color(color.r, color.g, color.b, 0.5f);
+        
+    }
 }

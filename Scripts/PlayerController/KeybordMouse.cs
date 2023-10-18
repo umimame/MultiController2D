@@ -1,41 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KeybordMouse : PlayerController
 {
-    [SerializeField] private GameObject aimCircle;
-    [SerializeField] private Hunger hunger;
-    public bool left;
+
     protected override void Start()
     {
         base.Start();
-        hunger.Initialize();
+        
     }
 
-    protected override void Update()
+    protected override void HeadUpdate()
     {
-        base.Update();
-        engine.LookAtVec(aimCircle.transform.position);
-        if(Attack01 == true)
+        base.HeadUpdate();
+    }
+
+    protected override void MiddleUpdate()
+    {
+        if (hp.entity <= 0) { state = State.Death; }
+
+        switch (state)
         {
-            hunger.inUse.exe = true;
+            case State.Spawn:
+                state = State.Idol;
+                break;
+            case State.Idol:
+                base.MiddleUpdate();
+                clamp.moveObject.transform.position = AddFunction.CameraToMouse();
+                break;
+            case State.Death:
+                Death();
+                break;
         }
-        left = Attack01;
     }
 
-    protected override void InputToVelocity()
+    protected override void LastUpdate()
     {
-        base.InputToVelocity();
+        base.LastUpdate();
+        engine.LookAtVec(clamp.moveObject.transform.position);
+        targetPos = (clamp.moveObject.transform.position - transform.position).normalized;
+        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
+    }
+
+    protected override void InputToVelocityPlan()
+    {
+        base.InputToVelocityPlan();
         engine.velocityPlan += Move;
     }
 
-    protected override Vector2 Move
+    protected override Vector3 Move
     {
         get { return keyMap.Keybord.Move.ReadValue<Vector2>().normalized * speed.entity; }
     }
-    public bool Attack01
+    protected override float Attack1
     {
-        get { return keyMap.Keybord.Attack01.ReadValue<bool>(); }
+        get { return keyMap.Keybord.Attack1.ReadValue<float>(); }
     }
+
 }

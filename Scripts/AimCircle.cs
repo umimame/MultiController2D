@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class AimCircle : MonoBehaviour
 {
-    [SerializeField] private Vector3 mousePos;
-    [SerializeField] private Vector3 mousePosInCamera;
-    private void Update()
+    [field: SerializeField] public CircleClamp clamp { get; set; }
+    [field: SerializeField] public Vector3 inputAimPos { get; set; }
+    [field: SerializeField] public Vector3 aimPosInCamera { get; set; }
+    [field: SerializeField] public GameObject parentObj { get; set; }
+    [field: SerializeField] public Vector3 lookingPos { get; set; }
+    private void Start()
     {
-        mousePos = Input.mousePosition;
-        mousePosInCamera = Camera.main.ScreenToWorldPoint(mousePos);
-        transform.position = new Vector3(mousePosInCamera.x, mousePosInCamera.y, 0);
+        clamp.Initialize();
+    }
+    protected virtual void Update()
+    {
+        transform.position = new Vector3(aimPosInCamera.x, aimPosInCamera.y, 0);
+        lookingPos = (transform.TransformPoint(transform.position) - parentObj.transform.position).normalized;
+        clamp.Limit();
     }
 }
+
