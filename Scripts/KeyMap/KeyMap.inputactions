@@ -126,7 +126,7 @@
                     "path": "<Keyboard>/f12",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keybord",
                     "action": "Debug",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -295,114 +295,6 @@
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Joy",
-            "id": "6713fd39-8d44-454f-913c-c14990b16f79",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "72c5b45b-4f5f-4637-b094-789cd459f726",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Attack1",
-                    "type": "Button",
-                    "id": "c22983b9-01a6-46d4-9058-fdd625350e87",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack2",
-                    "type": "Button",
-                    "id": "37f637d3-a3d9-4a81-a8bd-eca7f25c4073",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack3",
-                    "type": "Button",
-                    "id": "eed858bd-a376-4b5d-98a8-a991b9f333a9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Attack4",
-                    "type": "Button",
-                    "id": "fabb426c-b3bb-49cd-9be6-829c440fb17f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "9670be44-93f0-4889-ae54-a5e81cdd7ce2",
-                    "path": "<HID::Nintendo Co., Ltd. USB Gamepad>/stick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c960c8a5-d034-4b52-aa91-1d8288f41226",
-                    "path": "<HID::Nintendo Co., Ltd. USB Gamepad>/button7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pad",
-                    "action": "Attack1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cfd9e40a-2043-4fb4-9a65-8b2bb4e9f41c",
-                    "path": "<HID::Nintendo Co., Ltd. USB Gamepad>/button6",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pad",
-                    "action": "Attack2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d0dd11a7-e637-40ac-b94d-35f7d2687887",
-                    "path": "<HID::Nintendo Co., Ltd. USB Gamepad>/button5",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pad",
-                    "action": "Attack3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f092636-0dfd-4150-8cc9-b7134dc3f2a5",
-                    "path": "<HID::Nintendo Co., Ltd. USB Gamepad>/button4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Pad",
-                    "action": "Attack4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
         }
     ],
     "controlSchemes": [
@@ -412,7 +304,7 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
-                    "isOptional": false,
+                    "isOptional": true,
                     "isOR": false
                 }
             ]
