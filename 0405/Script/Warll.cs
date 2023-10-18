@@ -18,5 +18,13 @@ public class Warll : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
+        if (other.gameObject.CompareTag("Player_Bullet01"))
+        {
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.CompareTag("Player_Bullet02"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

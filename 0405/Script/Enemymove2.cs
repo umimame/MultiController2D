@@ -14,8 +14,8 @@ public class Enemymove2 : MonoBehaviour
 
     void Start()
     {
-        player1 = GameObject.FindGameObjectWithTag("Player1").transform;  // プレイヤーのTransformを取得
-        player2 = GameObject.FindGameObjectWithTag("Player2").transform;
+        player1 = GameObject.FindGameObjectWithTag("Player01").transform;  // プレイヤーのTransformを取得
+        player2 = GameObject.FindGameObjectWithTag("Player02").transform;
         rb = GetComponent<Rigidbody2D>();
         nextFireTime = Time.time + fireRate;  // 最初に弾を撃つ時間を設定
     }
@@ -46,6 +46,10 @@ public class Enemymove2 : MonoBehaviour
         else
         {
             rb.velocity = Vector2.zero;  // プレイヤーが検知範囲外にいる場合は停止
+        }
+        if (Input.GetKey("e"))
+        {
+            Destroy(gameObject);
         }
     }
 
