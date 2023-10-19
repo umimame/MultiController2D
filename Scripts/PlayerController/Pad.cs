@@ -29,6 +29,7 @@ public class Pad : PlayerController
                 base.MiddleUpdate();
                 clamp.moveObject.transform.position = transform.position;
                 clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
+                hunger.inUse.trigger = Convert.ToBoolean(Attack1);
                 break;
             case State.Death:
                 Death();
@@ -40,7 +41,6 @@ public class Pad : PlayerController
     {
         base.LastUpdate();
         LookAtMovingDirection();
-        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void InputToVelocityPlan()
