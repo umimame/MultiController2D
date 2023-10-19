@@ -40,7 +40,7 @@ public class Pad : PlayerController
     {
         base.LastUpdate();
         LookAtMovingDirection();
-        hunger.inUse.trigger = Convert.ToBoolean(keyMap.Pad.Attack1.ReadValue<float>());
+        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void InputToVelocityPlan()
@@ -68,16 +68,12 @@ public class Pad : PlayerController
     /// </summary>
     protected override Vector3 Move
     {
-        get {
-            return this.keyMap.Pad.Move.ReadValue<Vector2>(); }
+        get { return keyMap.Pad.Move.ReadValue<Vector2>(); }
     }
 
     protected override float Attack1
     {
-        get
-        {
-            Debug.Log(gameObject.tag); 
-            return this.keyMap.Pad.Attack1.ReadValue<float>(); }
+        get { return keyMap.Pad.Attack1.ReadValue<float>(); }
     }
 
 }

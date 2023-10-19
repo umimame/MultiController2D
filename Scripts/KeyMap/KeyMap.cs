@@ -148,7 +148,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f12"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keybord"",
+                    ""groups"": """",
                     ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -317,6 +317,114 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Joy"",
+            ""id"": ""6713fd39-8d44-454f-913c-c14990b16f79"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""72c5b45b-4f5f-4637-b094-789cd459f726"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack1"",
+                    ""type"": ""Button"",
+                    ""id"": ""c22983b9-01a6-46d4-9058-fdd625350e87"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack2"",
+                    ""type"": ""Button"",
+                    ""id"": ""37f637d3-a3d9-4a81-a8bd-eca7f25c4073"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack3"",
+                    ""type"": ""Button"",
+                    ""id"": ""eed858bd-a376-4b5d-98a8-a991b9f333a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack4"",
+                    ""type"": ""Button"",
+                    ""id"": ""fabb426c-b3bb-49cd-9be6-829c440fb17f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""9670be44-93f0-4889-ae54-a5e81cdd7ce2"",
+                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c960c8a5-d034-4b52-aa91-1d8288f41226"",
+                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/button7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Attack1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfd9e40a-2043-4fb4-9a65-8b2bb4e9f41c"",
+                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/button6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Attack2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0dd11a7-e637-40ac-b94d-35f7d2687887"",
+                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/button5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Attack3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f092636-0dfd-4150-8cc9-b7134dc3f2a5"",
+                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/button4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Pad"",
+                    ""action"": ""Attack4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -326,7 +434,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -357,6 +465,13 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         m_Pad_Attack2 = m_Pad.FindAction("Attack2", throwIfNotFound: true);
         m_Pad_Attack3 = m_Pad.FindAction("Attack3", throwIfNotFound: true);
         m_Pad_Attack4 = m_Pad.FindAction("Attack4", throwIfNotFound: true);
+        // Joy
+        m_Joy = asset.FindActionMap("Joy", throwIfNotFound: true);
+        m_Joy_Move = m_Joy.FindAction("Move", throwIfNotFound: true);
+        m_Joy_Attack1 = m_Joy.FindAction("Attack1", throwIfNotFound: true);
+        m_Joy_Attack2 = m_Joy.FindAction("Attack2", throwIfNotFound: true);
+        m_Joy_Attack3 = m_Joy.FindAction("Attack3", throwIfNotFound: true);
+        m_Joy_Attack4 = m_Joy.FindAction("Attack4", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -562,6 +677,84 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         }
     }
     public PadActions @Pad => new PadActions(this);
+
+    // Joy
+    private readonly InputActionMap m_Joy;
+    private List<IJoyActions> m_JoyActionsCallbackInterfaces = new List<IJoyActions>();
+    private readonly InputAction m_Joy_Move;
+    private readonly InputAction m_Joy_Attack1;
+    private readonly InputAction m_Joy_Attack2;
+    private readonly InputAction m_Joy_Attack3;
+    private readonly InputAction m_Joy_Attack4;
+    public struct JoyActions
+    {
+        private @KeyMap m_Wrapper;
+        public JoyActions(@KeyMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Joy_Move;
+        public InputAction @Attack1 => m_Wrapper.m_Joy_Attack1;
+        public InputAction @Attack2 => m_Wrapper.m_Joy_Attack2;
+        public InputAction @Attack3 => m_Wrapper.m_Joy_Attack3;
+        public InputAction @Attack4 => m_Wrapper.m_Joy_Attack4;
+        public InputActionMap Get() { return m_Wrapper.m_Joy; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(JoyActions set) { return set.Get(); }
+        public void AddCallbacks(IJoyActions instance)
+        {
+            if (instance == null || m_Wrapper.m_JoyActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_JoyActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Attack1.started += instance.OnAttack1;
+            @Attack1.performed += instance.OnAttack1;
+            @Attack1.canceled += instance.OnAttack1;
+            @Attack2.started += instance.OnAttack2;
+            @Attack2.performed += instance.OnAttack2;
+            @Attack2.canceled += instance.OnAttack2;
+            @Attack3.started += instance.OnAttack3;
+            @Attack3.performed += instance.OnAttack3;
+            @Attack3.canceled += instance.OnAttack3;
+            @Attack4.started += instance.OnAttack4;
+            @Attack4.performed += instance.OnAttack4;
+            @Attack4.canceled += instance.OnAttack4;
+        }
+
+        private void UnregisterCallbacks(IJoyActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Attack1.started -= instance.OnAttack1;
+            @Attack1.performed -= instance.OnAttack1;
+            @Attack1.canceled -= instance.OnAttack1;
+            @Attack2.started -= instance.OnAttack2;
+            @Attack2.performed -= instance.OnAttack2;
+            @Attack2.canceled -= instance.OnAttack2;
+            @Attack3.started -= instance.OnAttack3;
+            @Attack3.performed -= instance.OnAttack3;
+            @Attack3.canceled -= instance.OnAttack3;
+            @Attack4.started -= instance.OnAttack4;
+            @Attack4.performed -= instance.OnAttack4;
+            @Attack4.canceled -= instance.OnAttack4;
+        }
+
+        public void RemoveCallbacks(IJoyActions instance)
+        {
+            if (m_Wrapper.m_JoyActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IJoyActions instance)
+        {
+            foreach (var item in m_Wrapper.m_JoyActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_JoyActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public JoyActions @Joy => new JoyActions(this);
     private int m_KeybordSchemeIndex = -1;
     public InputControlScheme KeybordScheme
     {
@@ -588,6 +781,14 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
         void OnDebug(InputAction.CallbackContext context);
     }
     public interface IPadActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnAttack1(InputAction.CallbackContext context);
+        void OnAttack2(InputAction.CallbackContext context);
+        void OnAttack3(InputAction.CallbackContext context);
+        void OnAttack4(InputAction.CallbackContext context);
+    }
+    public interface IJoyActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack1(InputAction.CallbackContext context);

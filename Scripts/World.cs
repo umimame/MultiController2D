@@ -21,7 +21,7 @@ public class World : SingletonDontDestroy<World>
         EndGame,
         Non,
     }
-    //[field: SerializeField] public KeyMapCallBack keyMap { get; private set; }
+    [field: SerializeField] public KeyMapCallBack keyMap { get; private set; }
     [field: SerializeField] public PresetsByPlayerType presets { get; set; }
     [field: SerializeField] public List<GameObject> players { get; set; }
     [SerializeField] private List<PlayerController> playerController;
@@ -39,13 +39,14 @@ public class World : SingletonDontDestroy<World>
     protected override void Awake()
     {
         base.Awake();
+        keyMap = new KeyMapCallBack();
         players = new List<GameObject>();
         playerController = new List<PlayerController>();
 
+        PlayerInstance();
     }
     private void Start()
     {
-        PlayerInstance();
     }
 
     private void Update()
@@ -90,7 +91,6 @@ public class World : SingletonDontDestroy<World>
 
                 case ControllerType.Pad_CardinalDirection:
                     players.Add(Instantiate(player_Pad_CardinalDirectione));
-                    
                     schema = "Pad";
                     break;
 
@@ -106,12 +106,8 @@ public class World : SingletonDontDestroy<World>
             players[i].transform.position = presets.playerPos[i];
             playerController.Add(players[i].GetComponentInChildren<PlayerController>());
             playerController[i].ColorChange(presets.playerColorPre[i]);
-            if(i != 0)
-            {
-                playerController[i].input.actions = playerController[0].input.actions;
-            }
             Debug.Log(playerController[i].input.currentControlScheme);
-            //inputManager.JoinPlayer(i, -1, playerController[i].input.currentControlScheme);
+            inputManager.JoinPlayer(i, -1, playerController[i].input.currentControlScheme);
             //inputManager.JoinPlayerFromAction(playerController[i].keyMap.Pad.Move.started)
         }
     }
@@ -145,18 +141,6 @@ public class World : SingletonDontDestroy<World>
         GUILayout.Label($"rightShoulder: {Gamepad.current.rightShoulder.ReadValue()}");
         GUILayout.Label($"rightTrigger: {Gamepad.current.rightTrigger.ReadValue()}");
 
-    }
-    
-    // プレイヤー入室時に受け取る通知
-    public void OnPlayerJoined(PlayerInput playerInput)
-    {
-        print($"プレイヤー#{playerInput.user.index}が入室！");
-    }
-
-    // プレイヤー退室時に受け取る通知
-    public void OnPlayerLeft(PlayerInput playerInput)
-    {
-        print($"プレイヤー#{playerInput.user.index}が退室！");
     }
 }
 public class SingletonDontDestroy<T> : MonoBehaviour where T : MonoBehaviour
@@ -364,9 +348,6 @@ public class KeyMapCallBack
         }
     }
 
-    /// <summary>
-    /// リセットする
-    /// </summary>
     public void Reset()
     {
         time = 0.0f;

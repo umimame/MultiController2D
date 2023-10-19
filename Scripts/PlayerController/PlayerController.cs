@@ -15,7 +15,6 @@ public class PlayerController : Chara
     [field: SerializeField] public PlayerInput input{get; private set; }
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
-    [field: SerializeField] public Interval attackAcceptance { get; set; }  // 無敵状態を管理する
     private void Awake()
     {
         transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
@@ -24,13 +23,13 @@ public class PlayerController : Chara
     protected override void Start()
     {
         base.Start();
+        transform.tag = transform.parent.tag;
         keyMap = new KeyMap();
-        DeviceSeach();
         keyMap.Enable();
+        DeviceSeach();
         beforeVec = Vector3.zero;
         clamp.Initialize();
         hunger = GetComponent<Hunger>();
-        attackAcceptance.Initialize(true);
     }
 
     /// <summary>
@@ -39,14 +38,12 @@ public class PlayerController : Chara
     protected override void HeadUpdate()
     {
         base.HeadUpdate();
+        InputToVelocityPlan();
     }
 
     protected override void MiddleUpdate()
     {
-        InputToVelocityPlan();
         base.MiddleUpdate();
-        attackAcceptance.Update();
-        Debug.Log(input.currentActionMap);
     }
 
     protected override void LastUpdate()
@@ -67,7 +64,6 @@ public class PlayerController : Chara
             Debug.Log(device);
         }
     }
-
     /// <summary>
     /// 継承先でoverrideして使う
     /// </summary>
@@ -81,21 +77,24 @@ public class PlayerController : Chara
         get { return true; }
     }
 
+    /// <summary>
+    /// 移動の入力
+    /// </summary>
+    protected virtual Vector3 Move
+    {
+        get { return Vector3.zero; }
+    }
 
     protected virtual void UnderAttack(Collider2D co)
     {
-        if(co.tag != transform.tag) // 衝突先のタグが敵性の場合
+        if(co.tag != transform.tag) // 衝突先のタグが自軍と異なる場合
         {
-            if(attackAcceptance.active == true)   // 無敵状態でなければ
+            Debug.Log("UnderAttack");
+            if (co.GetComponent<Bullet>())
             {
-                if (co.GetComponent<Bullet>())  // 敵性のBulletから攻撃力を取得してダメージ計算
-                {
-                    Bullet coScript = co.GetComponent<Bullet>();
-                    hp.entity -= coScript.pow.entity;
-                    Debug.Log(hp.entity);
-                }
-
-                attackAcceptance.Reset(); // 無敵状態にする
+                Bullet coScript = co.GetComponent<Bullet>();
+                hp.entity -= coScript.pow.entity;
+                Debug.Log(hp.entity);
             }
         }
     }
@@ -114,13 +113,6 @@ public class PlayerController : Chara
     {
         engine.sprite.enabled = false;
         engine.aimCircle.enabled = false;
-    }
-    /// <summary>
-    /// 移動の入力
-    /// </summary>
-    protected virtual Vector3 Move
-    {
-        get { return Vector3.zero; }
     }
     protected virtual float Attack1
     {
