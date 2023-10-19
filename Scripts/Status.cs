@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 /// <summary>
 /// ƒpƒ‰ƒ[ƒ^<br/>
@@ -54,7 +55,6 @@ public class Chara : MonoBehaviour
     /// </summary>
     protected virtual void HeadUpdate()
     {
-        engine.velocityPlan = new Vector2(0.0f, 0.0f);
 
 
     }
@@ -76,6 +76,7 @@ public class Chara : MonoBehaviour
     protected virtual void LastUpdate()
     {
         engine.VelocityResult();
+        engine.velocityPlan = new Vector2(0.0f, 0.0f);
     }
     protected virtual void Update()
     {
@@ -84,6 +85,7 @@ public class Chara : MonoBehaviour
         LastUpdate();
 
     }
+
 
     /// <summary>
     /// €–S‚Ì‹““®<br/>
