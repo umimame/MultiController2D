@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9037647098229206210}
   - component: {fileID: 9147882213990313709}
+  - component: {fileID: 5164089315777883705}
   m_Layer: 3
   m_Name: Sprite
   m_TagString: Untagged
@@ -116,6 +117,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5164089315777883705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765555299911752683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c36d80a681645c4ab3640773b7d8e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.1
+  shakeDuration: 0.2
+  target: {fileID: 4640157509861967230}
+  <active>k__BackingField: 0
 --- !u!1 &4933418459380892026
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +236,8 @@ MonoBehaviour:
     radius: 13
   <hunger>k__BackingField: {fileID: 4680822090249555068}
   <ready>k__BackingField: 0
+  <cameraShaker>k__BackingField: {fileID: 8041732132736155380}
+  spriteShaker: {fileID: 5164089315777883705}
 --- !u!114 &8489864815316624870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e67b8e13516868a418e5a4e9ccf7fdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <inUse>k__BackingField: {fileID: 0}
+  <inUse>k__BackingField: []
   <generators>k__BackingField:
   - {fileID: 8650720988308940105}
 --- !u!114 &2353632152538662556
@@ -502,6 +521,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4822158463518275286, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 4640157509861967230}
+    - target: {fileID: 4822158463518275286, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
+      propertyPath: shakeAmount
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4822158463518275286, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
+      propertyPath: shakeDuration
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5440534933122073377, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
       propertyPath: m_Name
       value: Camera
@@ -520,6 +551,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2151266222895465367, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
   m_PrefabInstance: {fileID: 3274758315123623970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8041732132736155380 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4822158463518275286, guid: 0aad09e78b205644db8a7e7c96955764, type: 3}
+  m_PrefabInstance: {fileID: 3274758315123623970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c36d80a681645c4ab3640773b7d8e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7083537538691391911
 PrefabInstance:
   m_ObjectHideFlags: 0

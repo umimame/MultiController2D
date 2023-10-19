@@ -29,7 +29,8 @@ public class Pad : PlayerController
                 base.MiddleUpdate();
                 clamp.moveObject.transform.position = transform.position;
                 clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
-                hunger.inUse.trigger = Convert.ToBoolean(Attack1);
+                hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
+                hunger.inUse[1].trigger = Convert.ToBoolean(Attack2);
                 break;
             case State.Death:
                 Death();

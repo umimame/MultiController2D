@@ -41,7 +41,7 @@ public class KeybordMouse : PlayerController
         base.LastUpdate();
         engine.LookAtVec(clamp.moveObject.transform.position);
         targetPos = (clamp.moveObject.transform.position - transform.position).normalized;
-        hunger.inUse.trigger = Convert.ToBoolean(Attack1);
+        hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void InputToVelocityPlan()

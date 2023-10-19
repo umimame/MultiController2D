@@ -16,6 +16,8 @@ public class PlayerController : Chara
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
     [field: SerializeField] public bool ready { get; set; }
+    [field: SerializeField] public Shaker cameraShaker { get; set; }
+    [SerializeField] private Shaker spriteShaker;
     private void Awake()
     {
         transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
@@ -90,13 +92,15 @@ public class PlayerController : Chara
     {
         if(co.tag != transform.tag) // 衝突先のタグが自軍と異なる場合
         {
-            Debug.Log("UnderAttack");
             if (co.GetComponent<Bullet>())
             {
                 Bullet coScript = co.GetComponent<Bullet>();
                 hp.entity -= coScript.pow.entity;
                 Debug.Log(hp.entity);
             }
+
+            cameraShaker.active = true;
+            spriteShaker.active = true;
         }
     }
 
