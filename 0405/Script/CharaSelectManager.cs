@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class CharaSelectManager : MonoBehaviour
 
     public Text PlayerName;
     public Text PushKey;
+    [field: SerializeField] private SceneAsset scene { get; set; }
 
     public int Character1 = 1;
     public int Character2 = 2;
@@ -90,7 +92,7 @@ public class CharaSelectManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SceneManager.LoadScene("2DMap");
+            SceneManager.LoadScene(scene.name);
         }
     }
 }
