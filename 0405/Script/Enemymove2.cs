@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class Enemymove2 : MonoBehaviour
 {
@@ -7,6 +9,7 @@ public class Enemymove2 : MonoBehaviour
     public float detectionRange = 15.0f;  // プレイヤーを検知する範囲
     public float fireRate = 2.0f;  // 弾を撃つ頻度（秒）
     public GameObject bulletPrefab;  // 弾のプレハブ
+    public GameObject itemPrefab;
     public float bulletSpeed = 10.0f;
     public AudioClip shootSound; // 弾を撃つSE
     private Transform player1;  // プレイヤーのTransformコンポーネント
@@ -54,6 +57,10 @@ public class Enemymove2 : MonoBehaviour
         }
         if (Input.GetKey("e"))
         {
+            if (Random.value <= 0.3f)
+            {
+                DropItem();
+            }
             Destroy(gameObject);
         }
     }
@@ -70,5 +77,10 @@ public class Enemymove2 : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Vector2 direction = (targetPlayer.position - transform.position).normalized;
         bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+    }
+
+    void DropItem()
+    {
+        GameObject item = Instantiate(itemPrefab, transform.position, Quaternion.identity);
     }
 }
