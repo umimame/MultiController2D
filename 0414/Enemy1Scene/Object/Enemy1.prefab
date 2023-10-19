@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8454127343465928974}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +105,8 @@ MonoBehaviour:
   self: {fileID: 3835455444335318472}
   explosionSE: {fileID: 8300000, guid: 3c4e257057e46aa4491517cb54973d16, type: 3}
   moveSE: {fileID: 7013887924158710438}
+  scale: {x: 1, y: 10, z: 0}
+  scale2: {x: 20, y: 1, z: 0}
 --- !u!58 &33214255794886395
 CircleCollider2D:
   m_ObjectHideFlags: 0
