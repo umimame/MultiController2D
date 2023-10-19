@@ -76,4 +76,17 @@ public class Pad : PlayerController
         get { return keyMap.Pad.Attack1.ReadValue<float>(); }
     }
 
+    public float Attack2
+    {
+        get { return keyMap.Pad.Attack2.ReadValue<float>(); }
+    }
+    public float Attack3
+    {
+        get { return keyMap.Pad.Attack3.ReadValue<float>(); }
+    }
+    public float Attack4
+    {
+        get { return keyMap.Pad.Attack4.ReadValue<float>(); }
+    }
+
 }

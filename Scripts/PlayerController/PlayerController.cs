@@ -15,6 +15,7 @@ public class PlayerController : Chara
     [field: SerializeField] public PlayerInput input{get; private set; }
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
+    [field: SerializeField] public bool ready { get; set; }
     private void Awake()
     {
         transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする

@@ -34,6 +34,7 @@ public class World : SingletonDontDestroy<World>
     [field: SerializeField] public bool timeStop { get; private set; }
     [field: SerializeField] public AlwaysUI debugUI { get; private set; }
     [SerializeField] private PlayerInputManager inputManager;
+    [SerializeField] private GameObject stage;
     
 
     protected override void Awake()
@@ -106,6 +107,8 @@ public class World : SingletonDontDestroy<World>
             players[i].transform.position = presets.playerPos[i];
             playerController.Add(players[i].GetComponentInChildren<PlayerController>());
             playerController[i].ColorChange(presets.playerColorPre[i]);
+            ClampByStage clamp = players[i].GetComponentInChildren<ClampByStage>();
+            clamp.stage = stage;
             Debug.Log(playerController[i].input.currentControlScheme);
             inputManager.JoinPlayer(i, -1, playerController[i].input.currentControlScheme);
             //inputManager.JoinPlayerFromAction(playerController[i].keyMap.Pad.Move.started)
@@ -353,4 +356,3 @@ public class KeyMapCallBack
         time = 0.0f;
     }
 }
-
