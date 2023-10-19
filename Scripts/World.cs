@@ -307,6 +307,7 @@ public class KeyMapCallBack
     [field: SerializeField] public bool active { get; private set; }
     [SerializeField] private float interval;
     [SerializeField] private float time;
+    [field: SerializeField] public bool timeOverride;
 
     /// <summary>
     /// 引数には最初から使用できるかどうかを記述する
@@ -354,5 +355,25 @@ public class KeyMapCallBack
     public void Reset()
     {
         time = 0.0f;
+    }
+}
+
+[Serializable] public class Shake
+{
+    [field: SerializeField] public Interval interval { get; set; }
+    [field: SerializeField] public GameObject targetObj { get; set; }
+
+    public void Initialize()
+    {
+        interval.Initialize(true);
+    }
+
+    public void Update()
+    {
+        if(interval.active == true)
+        {
+        }
+        interval.Update();
+
     }
 }

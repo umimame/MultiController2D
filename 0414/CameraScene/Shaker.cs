@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraSC : MonoBehaviour
+public class Shaker : MonoBehaviour
 {
     [SerializeField] private float shakeAmount;
     [SerializeField] private float shakeDuration;
     private float time;
     public Transform target;
+    [field: SerializeField] public bool active { get;set; }
 
     private void Start()
     {
-        shakeAmount = 0.1f;//揺れ幅
-        shakeDuration = 1f;//揺れの長さ
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 nowPosition = target.position;
-        nowPosition.z = -10f;
-        if (Input.GetKeyDown(KeyCode.Space) && time <= 0f)
+        if(GetComponent<Camera>() != null ) // アタッチ先のオブジェクトがカメラなら
+        {
+            nowPosition.z = -10f;
+        }
+        if ( time <= 0f)
         {
             // Space キーが押され、かつ揺れの処理が開始されていない場合
 
@@ -29,7 +32,7 @@ public class CameraSC : MonoBehaviour
         }
 
         // 経過時間が揺れの期間以下の間、カメラを揺らし続ける
-        if (time > 0f && time < shakeDuration)
+        if (time > 0f && time < shakeDuration && active == true)
         {
             // ランダムな揺れ量を取得
             float shakeX = Random.Range(-shakeAmount, shakeAmount);
@@ -57,6 +60,8 @@ public class CameraSC : MonoBehaviour
             resetPotision.x = target.position.x;
             resetPotision.y = target.position.y;
             transform.position = resetPotision;
+            active = false;
         }
     }
+
 }

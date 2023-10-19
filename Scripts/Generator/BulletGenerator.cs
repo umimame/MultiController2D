@@ -9,6 +9,7 @@ public class BulletGenerator : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Interval rate;
     [field: SerializeField] public Vector3 offset { get; set; }
+    [field: SerializeField] public float offsetRadian { get; set; }
     [SerializeField] private GameObject parent;
 
     public virtual void Start()
@@ -34,7 +35,7 @@ public class BulletGenerator : MonoBehaviour
         GameObject clone = Instantiate(bullet);
         Bullet cloneScript = clone.GetComponent<Bullet>();
         cloneScript.engine.transform.rotation = parent.transform.rotation;
-        clone.transform.position = parent.transform.rotation * offset + parent.transform.position;
+        clone.transform.position = Quaternion.Euler(0, 0, offsetRadian) * parent.transform.rotation * offset + parent.transform.position;
         clone.tag = parent.tag; // ’e‚ÌTag‚ðparent‚Æ“¯‚¶‚É‚·‚é
         cloneScript.engine.transform.tag = parent.tag;
         rate.Reset();
