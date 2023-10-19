@@ -81,16 +81,22 @@ public class CharaSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (SelPlayer1 == Character1 || SelPlayer1 == Character2 || SelPlayer1 == Character3)
         {
-            SelectNum = 1;
-            PlayerName.text = "Player2";
-            PushKey.text = "Please S Key";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SelectNum = 1;
+                PlayerName.text = "Player2";
+                PushKey.text = "Please S Key";
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (SelPlayer2 == Character1 || SelPlayer2 == Character2 || SelPlayer2 == Character3)
         {
-            SceneManager.LoadScene("2DMap");
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SceneManager.LoadScene("2DMap");
+            }
         }
     }
 }
