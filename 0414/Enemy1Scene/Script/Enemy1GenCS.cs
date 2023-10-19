@@ -17,7 +17,7 @@ public class Enemy1GenCS : MonoBehaviour
     {
         GenSpan = 5;
         time = 0;
-        GenNum = 2;
+        GenNum = 10;
 
         // ターゲットの初期化
         targets = new List<Transform>();
@@ -48,7 +48,7 @@ public class Enemy1GenCS : MonoBehaviour
                     GameObject enemy = Instantiate(EnemyPrefab);
                     enemy.transform.position = new Vector3(randomTarget.position.x + (RL == 0 ? xMinus : xPlus),
                         randomTarget.position.y + y, 0);
-                    Debug.Log("俺、参上！");
+                    //Debug.Log("俺、参上！");
                     // 生成した敵のターゲットを設定
                     enemy.GetComponent<Enemy1CS>().SetTarget(randomTarget);
                 }

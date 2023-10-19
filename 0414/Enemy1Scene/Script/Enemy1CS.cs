@@ -15,15 +15,20 @@ public class Enemy1CS : MonoBehaviour
     // 爆発エフェクト
     private EnemyParticle enemyParticle;
 
+
+    public Vector3 scale;
+    public Vector3 scale2;
     // Start is called before the first frame update
     void Start()
     {
-        speed = Random.Range(10.0f, 30.0f);
-        //speed = 20.0f;
+        //speed = Random.Range(10.0f, 30.0f);
+        speed = 10.0f;
         MoveSE();
         enemyParticle = GetComponent<EnemyParticle>();
         // 初期ターゲットを設定
         SetInitialTarget();
+
+
     }
 
     // Update is called once per frame
@@ -100,10 +105,20 @@ public class Enemy1CS : MonoBehaviour
             if (distanceToPlayer1 < distanceToPlayer2)
             {
                 SetTarget(allPlayers[0]);
+
+                //テスト用の処理
+
+                //gameObject.transform.localScale = new Vector3(scale.x, scale.y, scale.z);
+                GetComponent<Renderer>().material.color = Color.red;
             }
             else
             {
                 SetTarget(allPlayers[1]);
+
+                //テスト用の処理
+                //gameObject.transform.localScale = new Vector3(scale2.x, scale2.y, scale2.z);
+                GetComponent<Renderer>().material.color = Color.blue;
+
             }
         }
         else if (allPlayers.Count == 1)
@@ -130,10 +145,18 @@ public class Enemy1CS : MonoBehaviour
             if (distanceToPlayer1 < distanceToPlayer2)
             {
                 SetTarget(allPlayers[0]);
+
+                //テスト用の処理
+                //gameObject.transform.localScale = new Vector3(scale.x, scale.y, scale.z);
+                GetComponent<Renderer>().material.color = Color.red;
+
             }
             else
             {
                 SetTarget(allPlayers[1]);
+                //テスト用の処理
+                //gameObject.transform.localScale = new Vector3(scale2.x, scale2.y, scale2.z);
+                GetComponent<Renderer>().material.color = Color.blue;
             }
         }
         else if (allPlayers.Count == 1)
