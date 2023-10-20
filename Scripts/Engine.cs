@@ -37,6 +37,7 @@ using UnityEngine.UIElements;
     }
 
     /// <summary>
+    /// RigidBodyを動かす
     /// アタッチしたオブジェクトのUpdateの最後に呼ぶ
     /// </summary>
     public void VelocityResult()

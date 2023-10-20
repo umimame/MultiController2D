@@ -148,7 +148,7 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f12"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keybord"",
                     ""action"": ""Debug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -241,30 +241,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""40f2fe0d-f243-4caf-88e4-ff929db86be0"",
-                    ""path"": ""<HID::Nintendo Co., Ltd. USB Gamepad>/button8"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Pad"",
-                    ""action"": ""Attack1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""32f16448-75c9-4c09-b600-04cc2909672e"",
                     ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Pad"",
-                    ""action"": ""Attack2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a4644a98-d324-4e4a-a23c-7569e6c95189"",
-                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD 4 >/button7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
@@ -285,30 +263,8 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""690e3a39-baa6-4812-a20b-0153b9d44a8e"",
-                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD 4 >/button6"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Pad"",
-                    ""action"": ""Attack3"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""332249c4-8f0e-40d0-912d-5275b8995e1d"",
                     ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Pad"",
-                    ""action"": ""Attack4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""34c7ec21-6e7a-47f4-81e0-f9eee0b30ec0"",
-                    ""path"": ""<HID::HORI CO.,LTD. HORIPAD 4 >/button5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Pad"",
@@ -434,7 +390,12 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]
@@ -446,6 +407,11 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 {
                     ""devicePath"": ""<Gamepad>"",
                     ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Joystick>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]

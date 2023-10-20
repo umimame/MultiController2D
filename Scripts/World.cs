@@ -33,7 +33,7 @@ public class World : SingletonDontDestroy<World>
     [field: SerializeField] public int playerCount { get; set; }
     [field: SerializeField] public bool timeStop { get; private set; }
     [field: SerializeField] public AlwaysUI debugUI { get; private set; }
-    [SerializeField] private PlayerInputManager inputManager;
+    private PlayerInputManager inputManager;
     [SerializeField] private GameObject stage;
     
 
@@ -43,7 +43,7 @@ public class World : SingletonDontDestroy<World>
         keyMap = new KeyMapCallBack();
         players = new List<GameObject>();
         playerController = new List<PlayerController>();
-
+        inputManager = GetComponent<PlayerInputManager>();
         PlayerInstance();
     }
     private void Start()
@@ -110,8 +110,6 @@ public class World : SingletonDontDestroy<World>
             ClampByStage clamp = players[i].GetComponentInChildren<ClampByStage>();
             clamp.stage = stage;
             Debug.Log(playerController[i].input.currentControlScheme);
-            inputManager.JoinPlayer(i, -1, playerController[i].input.currentControlScheme);
-            //inputManager.JoinPlayerFromAction(playerController[i].keyMap.Pad.Move.started)
         }
     }
 
@@ -307,6 +305,7 @@ public class KeyMapCallBack
     [field: SerializeField] public bool active { get; private set; }
     [SerializeField] private float interval;
     [SerializeField] private float time;
+    [field: SerializeField] public bool timeOverride;
 
     /// <summary>
     /// 引数には最初から使用できるかどうかを記述する
@@ -354,5 +353,25 @@ public class KeyMapCallBack
     public void Reset()
     {
         time = 0.0f;
+    }
+}
+
+[Serializable] public class Shake
+{
+    [field: SerializeField] public Interval interval { get; set; }
+    [field: SerializeField] public GameObject targetObj { get; set; }
+
+    public void Initialize()
+    {
+        interval.Initialize(true);
+    }
+
+    public void Update()
+    {
+        if(interval.active == true)
+        {
+        }
+        interval.Update();
+
     }
 }

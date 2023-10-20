@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Pad : PlayerController
 {
@@ -28,8 +29,11 @@ public class Pad : PlayerController
             case State.Idol:
                 base.MiddleUpdate();
                 clamp.moveObject.transform.position = transform.position;
-                clamp.moveObject.transform.position += new Vector3(Move.x, Move.y) * speed.entity;
-                hunger.inUse.trigger = Convert.ToBoolean(Attack1);
+                clamp.moveObject.transform.position += new Vector3(inputVelocityPlan.x, inputVelocityPlan.y) * speed.entity;
+
+                LookAtMovingDirection();
+                hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
+                hunger.inUse[1].trigger = Convert.ToBoolean(Attack2);
                 break;
             case State.Death:
                 Death();
@@ -40,13 +44,12 @@ public class Pad : PlayerController
     protected override void LastUpdate()
     {
         base.LastUpdate();
-        LookAtMovingDirection();
     }
 
     protected override void InputToVelocityPlan()
     {
         base.InputToVelocityPlan();
-        engine.velocityPlan += Move * speed.entity;
+        engine.velocityPlan += inputVelocityPlan * speed.entity;
     }
 
     /// <summary>
@@ -56,11 +59,11 @@ public class Pad : PlayerController
     {
 
         // à⁄ìÆÇÃì¸óÕÇ™Ç†ÇÈèÍçáÇÃÇ›ï˚å¸ÇïœçXÇ∑ÇÈ
-        if (beforeVec != new Vector2(0, 0) && Move != new Vector3(0, 0))
+        if (beforeVec != new Vector2(0, 0) && inputVelocityPlan != new Vector3(0, 0))
         {
             engine.LookAtVec(clamp.moveObject.transform.position);
         }
-        beforeVec = Move;
+        beforeVec = inputVelocityPlan;
     }
 
     /// <summary>
@@ -89,4 +92,18 @@ public class Pad : PlayerController
         get { return keyMap.Pad.Attack4.ReadValue<float>(); }
     }
 
+    public void OnMove(InputValue value)
+    {
+        Debug.Log(transform.tag);
+        inputVelocityPlan += new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        inputVelocityPlan = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);
+        if (inputVelocityPlan.x == beforeVec.x)
+        {
+            Debug.Log("ìØÇ∂");
+        }
+    }
 }

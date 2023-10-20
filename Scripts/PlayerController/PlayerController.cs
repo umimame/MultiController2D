@@ -11,11 +11,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : Chara
 {
     [field: SerializeField] public Vector2 beforeVec { get; set; }
+    [field: SerializeField] public Vector3 inputVelocityPlan { get; set; }
     public KeyMap keyMap { get; private set; }
     [field: SerializeField] public PlayerInput input{get; private set; }
     [field: SerializeField] public CircleClamp clamp { get; set; }
     [field: SerializeField] public Hunger hunger { get; set; }
     [field: SerializeField] public bool ready { get; set; }
+    [field: SerializeField] public Shaker cameraShaker { get; set; }
+    [SerializeField] private Shaker spriteShaker;
     private void Awake()
     {
         transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
@@ -26,7 +29,7 @@ public class PlayerController : Chara
         base.Start();
         transform.tag = transform.parent.tag;
         keyMap = new KeyMap();
-        keyMap.Enable();
+        //keyMap.Enable();
         DeviceSeach();
         beforeVec = Vector3.zero;
         clamp.Initialize();
@@ -51,7 +54,9 @@ public class PlayerController : Chara
     {
         base.LastUpdate();
         clamp.Limit();
+        inputVelocityPlan = Vector3.zero;
     }
+
     private void DeviceSeach()
     {
         if (!input.user.valid)
@@ -90,13 +95,15 @@ public class PlayerController : Chara
     {
         if(co.tag != transform.tag) // 衝突先のタグが自軍と異なる場合
         {
-            Debug.Log("UnderAttack");
             if (co.GetComponent<Bullet>())
             {
                 Bullet coScript = co.GetComponent<Bullet>();
                 hp.entity -= coScript.pow.entity;
                 Debug.Log(hp.entity);
             }
+
+            cameraShaker.active = true;
+            spriteShaker.active = true;
         }
     }
 
@@ -126,4 +133,5 @@ public class PlayerController : Chara
         engine.aimCircle.color = new Color(color.r, color.g, color.b, 0.5f);
         
     }
+
 }
