@@ -2,8 +2,10 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class World : SingletonDontDestroy<World>
 {
@@ -18,7 +20,8 @@ public class World : SingletonDontDestroy<World>
         Title,
         StartGame,
         InGame,
-        EndGame,
+        GameEnd,
+        Result,
         Non,
     }
     [field: SerializeField] public KeyMapCallBack keyMap { get; private set; }
@@ -35,6 +38,7 @@ public class World : SingletonDontDestroy<World>
     [field: SerializeField] public AlwaysUI debugUI { get; private set; }
     private PlayerInputManager inputManager;
     [SerializeField] private GameObject stage;
+    [SerializeField] private SceneAsset endGameScene;
     
 
     protected override void Awake()
@@ -60,9 +64,14 @@ public class World : SingletonDontDestroy<World>
             case GameState.InGame:
 
                 break;
-            case GameState.EndGame:
-
+            case GameState.GameEnd:
+                SceneManager.LoadScene(endGameScene.name);
+                gameState = GameState.Result;
+                gameState = GameState.Result;
                 break;
+            case GameState.Result:
+                break;
+
         }
         playerCount = 0;
         for(int i =0;i<players.Count; ++i)
@@ -74,7 +83,7 @@ public class World : SingletonDontDestroy<World>
         }
         if(playerCount <= 1)
         {
-            gameState = GameState.EndGame;
+            gameState = GameState.GameEnd;
         }
     }
 

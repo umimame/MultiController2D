@@ -52,4 +52,9 @@ using UnityEngine.UIElements;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, obj - transform.position);
     }
 
+    public void CollDisabled()
+    {
+        coll.enabled = false;
+    }
+
 }

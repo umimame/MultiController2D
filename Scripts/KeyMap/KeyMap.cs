@@ -170,39 +170,39 @@ public partial class @KeyMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Attack1"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""a54c6100-5a33-4ee0-8789-55133ebcd91e"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Attack2"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""5e89dfbb-afbf-4ffa-80f0-414368504ace"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Attack3"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""f9b04932-b790-45ef-b1a1-a18a35eb91b0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Attack4"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""af289515-a525-4516-9974-60703c8e89e9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
