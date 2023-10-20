@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
 {
-    public int maxHP = 100;
+    public int maxHP = 20;
     public int currentHP;
     GameObject bullet;
     private object clone;

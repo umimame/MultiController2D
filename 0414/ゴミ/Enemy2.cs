@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 using UnityEngine.UI;
 
-public class Enemy2 : MonoBehaviour
+public class Enemymove2 : MonoBehaviour
 {
     private float speed;
     public int hp;
