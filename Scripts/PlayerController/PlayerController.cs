@@ -19,6 +19,7 @@ public class PlayerController : Chara
     [field: SerializeField] public bool ready { get; set; }
     [field: SerializeField] public Shaker cameraShaker { get; set; }
     [SerializeField] private Shaker spriteShaker;
+    [field: SerializeField] public bool alive { get; set; }
     private void Awake()
     {
         transform.tag = transform.parent.tag;   // tagを親オブジェクトと同じにする
@@ -54,7 +55,6 @@ public class PlayerController : Chara
     {
         base.LastUpdate();
         clamp.Limit();
-        inputVelocityPlan = Vector3.zero;
     }
 
     private void DeviceSeach()
@@ -91,7 +91,7 @@ public class PlayerController : Chara
         get { return Vector3.zero; }
     }
 
-    protected virtual void UnderAttack(Collider2D co)
+    protected virtual void UnderAttack(Collider2D co)   // 衝突時
     {
         if(co.tag != transform.tag) // 衝突先のタグが自軍と異なる場合
         {
@@ -99,10 +99,9 @@ public class PlayerController : Chara
             {
                 Bullet coScript = co.GetComponent<Bullet>();
                 hp.entity -= coScript.pow.entity;
-                Debug.Log(hp.entity);
             }
 
-            cameraShaker.active = true;
+            cameraShaker.active = true; // 衝突時の衝撃演出
             spriteShaker.active = true;
         }
     }

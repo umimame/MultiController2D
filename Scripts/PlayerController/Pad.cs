@@ -32,12 +32,18 @@ public class Pad : PlayerController
                 clamp.moveObject.transform.position += new Vector3(inputVelocityPlan.x, inputVelocityPlan.y) * speed.entity;
 
                 LookAtMovingDirection();
-                hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
-                hunger.inUse[1].trigger = Convert.ToBoolean(Attack2);
+                //hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
+                //hunger.inUse[1].trigger = Convert.ToBoolean(Attack2);
                 break;
             case State.Death:
+                engine.CollDisabled();
                 Death();
                 break;
+        }
+
+        if(state == State.Idol)
+        {
+            alive = true;
         }
     }
 
@@ -94,16 +100,25 @@ public class Pad : PlayerController
 
     public void OnMove(InputValue value)
     {
-        Debug.Log(transform.tag);
-        inputVelocityPlan += new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+        inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+    }
+    public void OnAttack1(InputValue value)
+    {
+        if (alive)
+        {
+            hunger.inUse[0].trigger = Convert.ToBoolean(value.Get<float>());
+        }
+    }
+    public void OnAttack2(InputValue value)
+    {
+        if (alive)
+        {
+            hunger.inUse[1].trigger = Convert.ToBoolean(value.Get<float>());
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         inputVelocityPlan = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);
-        if (inputVelocityPlan.x == beforeVec.x)
-        {
-            Debug.Log("“¯‚¶");
-        }
     }
 }
