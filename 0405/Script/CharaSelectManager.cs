@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +11,6 @@ public class CharaSelectManager : MonoBehaviour
 
     public Text PlayerName;
     public Text PushKey;
-    [field: SerializeField] private SceneAsset scene { get; set; }
 
     public int Character1 = 1;
     public int Character2 = 2;
@@ -83,16 +81,22 @@ public class CharaSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (SelPlayer1 == Character1 || SelPlayer1 == Character2 || SelPlayer1 == Character3)
         {
-            SelectNum = 1;
-            PlayerName.text = "Player2";
-            PushKey.text = "Please S Key";
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SelectNum = 1;
+                PlayerName.text = "Player2";
+                PushKey.text = "Please S Key";
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (SelPlayer2 == Character1 || SelPlayer2 == Character2 || SelPlayer2 == Character3)
         {
-            SceneManager.LoadScene(scene.name);
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SceneManager.LoadScene("2DMap");
+            }
         }
     }
 }
