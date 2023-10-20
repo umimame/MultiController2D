@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class PlayerNameSC : MonoBehaviour
+using UnityEditor;
+
+public class ResultUI : MonoBehaviour
 {
     [SerializeField] private Text Result;
     [SerializeField] private Text Who;
     [SerializeField] private Text PlayerName;
+    [SerializeField] public int winnerPlayer { get; set; } = 0;
     [SerializeField] private Text HowManyKills;
     [SerializeField] private Text KillsCount;
     [SerializeField] private Text HowManyShots;
@@ -18,6 +21,8 @@ public class PlayerNameSC : MonoBehaviour
 
     [SerializeField] private AudioSource playerNameSE;
     [SerializeField] private AudioSource drumRoll;
+
+    [SerializeField] private SceneAsset titleScene;
     
     private bool spaceKeyEntered = false; // Space キーが押されたかどうかのフラグ
     // Start is called before the first frame update
@@ -35,11 +40,11 @@ public class PlayerNameSC : MonoBehaviour
         ShotsCount.color = Color.red;
         TimeCount.color = Color.red;
         // PlayerName.textの内容によって色を変更
-        if (PlayerName.text.Contains("プレイヤー1"))
+        if (PlayerName.text.Contains("プレイヤー" + winnerPlayer))
         {
             PlayerName.color = UnityEngine.Color.green;
         }
-        else if (PlayerName.text.Contains("プレイヤー2"))
+        else if (PlayerName.text.Contains("プレイヤー" + winnerPlayer))
         {
             PlayerName.color = UnityEngine.Color.blue;
         }
@@ -60,7 +65,7 @@ public class PlayerNameSC : MonoBehaviour
         yield return new WaitForSeconds(2f);
         drumRoll.Stop();
 
-        PlayerName.text = "プレイヤー1"; // 最後に残ったプレイヤーのタグを参照
+        PlayerName.text = "プレイヤー" + winnerPlayer; // 最後に残ったプレイヤーのタグを参照
         PlayerNameSE();
 
         yield return new WaitForSeconds(3f);
@@ -82,7 +87,7 @@ public class PlayerNameSC : MonoBehaviour
         yield return new WaitUntil(() => spaceKeyEntered);
         //Spaceキーが押された後の処理
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene(titleScene.name);
         Debug.Log("タイトル行きまっせ～");
     }
 

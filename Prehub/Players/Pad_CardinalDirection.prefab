@@ -240,6 +240,7 @@ MonoBehaviour:
   <ready>k__BackingField: 0
   <cameraShaker>k__BackingField: {fileID: 1813601880197728878}
   spriteShaker: {fileID: 2795900569024010566}
+  <alive>k__BackingField: 0
 --- !u!114 &4050311772770890391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +396,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

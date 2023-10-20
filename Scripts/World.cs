@@ -39,7 +39,7 @@ public class World : SingletonDontDestroy<World>
     private PlayerInputManager inputManager;
     [SerializeField] private GameObject stage;
     [SerializeField] private SceneAsset endGameScene;
-    
+    [SerializeField] private InstanceUI resultController;
 
     protected override void Awake()
     {
@@ -65,8 +65,7 @@ public class World : SingletonDontDestroy<World>
 
                 break;
             case GameState.GameEnd:
-                SceneManager.LoadScene(endGameScene.name);
-                gameState = GameState.Result;
+                resultController.Instance();
                 gameState = GameState.Result;
                 break;
             case GameState.Result:
@@ -81,7 +80,7 @@ public class World : SingletonDontDestroy<World>
                 playerCount++;
             }
         }
-        if(playerCount <= 1)
+        if(gameState == GameState.InGame && playerCount <= 1)
         {
             gameState = GameState.GameEnd;
         }
@@ -152,6 +151,7 @@ public class World : SingletonDontDestroy<World>
         GUILayout.Label($"rightTrigger: {Gamepad.current.rightTrigger.ReadValue()}");
 
     }
+
 }
 public class SingletonDontDestroy<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -382,5 +382,23 @@ public class KeyMapCallBack
         }
         interval.Update();
 
+    }
+
+}
+
+[Serializable] public class InstanceUI
+{
+    [field: SerializeField] public GameObject UI { get; set; }
+    [SerializeField] private List<GameObject> clone = new List<GameObject>();
+
+    public void Instance()
+    {
+        clone.Add(GameObject.Instantiate(UI));
+    }
+
+    public void Death()
+    {
+        GameObject.Destroy(clone[0]);   // ç≈å„Ç©ÇÁè¡Ç∑
+        clone.RemoveAt(0);
     }
 }
