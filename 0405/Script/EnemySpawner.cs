@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public Enemy enemyscript;
     public GameObject enemyPrefab;
     public float spawnInterval = 5.0f;
     private float nextSpawnTime;
@@ -11,17 +12,26 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         nextSpawnTime = Time.time + spawnInterval;
+        enemyscript.enemymove = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.time >= nextSpawnTime)
+        if (enemyscript.enemymove == true)
         {
-            SpawnEnemyRandomly();
+            if (Time.time >= nextSpawnTime)
+            {
+                SpawnEnemyRandomly();
 
-            nextSpawnTime = Time.time + spawnInterval;
+                nextSpawnTime = Time.time + spawnInterval;
+            }
         }
+        else if (enemyscript.enemymove == false)
+        {
+            nextSpawnTime = float.MaxValue;
+        }
+
     }
 
     void SpawnEnemyRandomly()
