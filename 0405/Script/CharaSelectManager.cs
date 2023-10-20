@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,6 +19,7 @@ public class CharaSelectManager : MonoBehaviour
 
     public int SelPlayer1 = 0;
     public int SelPlayer2 = 0;
+    [SerializeField] private SceneAsset gameScene;
 
     int SelectNum = 0;
     private void Awake()
@@ -95,7 +97,7 @@ public class CharaSelectManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                SceneManager.LoadScene("2DMap");
+                SceneManager.LoadScene(gameScene.name);
             }
         }
     }
