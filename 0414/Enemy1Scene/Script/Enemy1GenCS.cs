@@ -15,7 +15,7 @@ public class Enemy1GenCS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenSpan = 5;
+        GenSpan = 3;
         time = 0;
         GenNum = 10;
 
