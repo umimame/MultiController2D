@@ -15,6 +15,7 @@ using System;
         Death,
     }
     [field: SerializeField] public GameObject Obj { get; set; }
+    [field: SerializeField] public ParticleSystem particle { get; set; }
     [field: SerializeField] public List<GameObject> clones { get; set; } = new List<GameObject>();
     [field: SerializeField] public DisplayState state { get; private set;}
 
@@ -54,10 +55,18 @@ using System;
     public virtual void Instance()
     {
         clones.Add(GameObject.Instantiate(Obj));
+        if(particle != null)
+        {
+            GameObject.Instantiate(particle);
+        }
     }
     public virtual void Instance(GameObject parent)
     {
         clones.Add(GameObject.Instantiate(Obj, parent.transform));
+        if (particle != null)
+        {
+            GameObject.Instantiate(particle,parent.transform);
+        }
     }
 
     /// <summary>

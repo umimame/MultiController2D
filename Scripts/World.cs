@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using My;
-using UnityEditor.Build.Content;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(AudioListener))]

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour
 {
-    [field: SerializeField] public SceneAsset title;
+    [field: SerializeField] public string title;
 }

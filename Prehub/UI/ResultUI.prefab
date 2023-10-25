@@ -845,7 +845,7 @@ MonoBehaviour:
   source: {fileID: 4065126816502932483}
   playerNameSE: {fileID: 8300000, guid: 1c4fc5cbe53a92d42bd1b1e80683c5da, type: 3}
   drumRoll: {fileID: 8300000, guid: 55afe10524f99514e8d242f912e5f58c, type: 3}
-  titleScene: {fileID: 102900000, guid: 745fc5fa3e8a20c45958bc10bfe88f64, type: 3}
+  titleScene: TitleScene
 --- !u!82 &4065126816502932483
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1010,6 +1010,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

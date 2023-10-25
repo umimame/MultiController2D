@@ -26,6 +26,10 @@ public class SceneManager_CharaSelect : MonoBehaviour
     {
         BGM.Play();
         currentIndex = 0;
+        for (int i = 0; i < infos.Length; ++i)
+        {
+            infos[i].SetActive(false);
+        }
         BeltChange();
         charaButtons = buttonsParent.GetComponentsInChildren<Button>();
         state = SceneState.Start;

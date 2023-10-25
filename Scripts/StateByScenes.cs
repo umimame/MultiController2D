@@ -9,7 +9,7 @@ namespace My
 {
     public class StateByScenes : MonoBehaviour
     {
-        [SerializeField] private List<SceneAsset> scenes = new List<SceneAsset>();
+        [SerializeField] private List<string> scenes = new List<string>();
         [field: SerializeField] public GameState state { get; set; }
         private void Start()
         {
@@ -27,7 +27,7 @@ namespace My
             int scenesIndex = -1;
             for (int i = 0; i < scenes.Count; ++i)
             {
-                if (scene.name == scenes[i].name)
+                if (scene.name == scenes[i])
                 {
                     scenesIndex = i;
                     break;
@@ -61,7 +61,7 @@ namespace My
             int scenesIndex = -1;
             for (int i = 0; i < scenes.Count; ++i)
             {
-                if (SceneManager.GetActiveScene().name == scenes[i].name)
+                if (SceneManager.GetActiveScene().name == scenes[i])
                 {
                     scenesIndex = i;
                     break;

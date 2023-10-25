@@ -71,7 +71,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
-  m_sharedMaterial: {fileID: -3810193668641758604, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
+  m_sharedMaterial: {fileID: 6035901045366662471, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316ac399eca5b684eb4a7fc65fba8241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 0}
+  scene: 
   <buttonText>k__BackingField: {fileID: 0}
 --- !u!1 &1937030412147427928
 GameObject:
@@ -503,6 +503,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 200
   m_TargetDisplay: 0
@@ -655,7 +656,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
-  m_sharedMaterial: {fileID: -3810193668641758604, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
+  m_sharedMaterial: {fileID: 6035901045366662471, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -792,7 +793,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
-  m_sharedMaterial: {fileID: -3810193668641758604, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
+  m_sharedMaterial: {fileID: 6035901045366662471, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1005,7 +1006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316ac399eca5b684eb4a7fc65fba8241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 0}
+  scene: 
   <buttonText>k__BackingField: {fileID: 0}
 --- !u!1 &2523238124860410422
 GameObject:
@@ -1076,7 +1077,7 @@ MonoBehaviour:
   m_text: Quit The Game?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 920135b0a2180e949ad3cfc3c47beac2, type: 2}
+  m_sharedMaterial: {fileID: 6035901045366662471, guid: 0e99053d57bcf4046b8fc6e1491ebfb2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1289,5 +1290,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316ac399eca5b684eb4a7fc65fba8241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 745fc5fa3e8a20c45958bc10bfe88f64, type: 3}
+  scene: TitleScene
   <buttonText>k__BackingField: {fileID: 0}

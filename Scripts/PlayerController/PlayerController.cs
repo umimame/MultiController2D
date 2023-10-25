@@ -23,6 +23,7 @@ public class PlayerController : Chara
     [field: SerializeField] public Shaker cameraShaker { get; set; }
     [SerializeField] private Shaker spriteShaker;
     [SerializeField] private Instancer deathEffect;
+    [SerializeField] private AudioClip deathSound;
     [field: SerializeField] public bool alive { get; set; }
     private void Awake()
     {
@@ -49,8 +50,21 @@ public class PlayerController : Chara
     protected override void HeadUpdate()
     {
         base.HeadUpdate();
+        if (hp.entity <= 0)
+        {
+            state = State.Death;
+            alive = false;
+        }
+        else
+        {
+            alive = true;
+        }
+
         deathEffect.Update();
-        InputToVelocityPlan();
+        if (alive)
+        {
+            InputToVelocityPlan();
+        }
         hpBar.Update(hp);
         if (alive)
         {
@@ -133,10 +147,11 @@ public class PlayerController : Chara
     {
         engine.sprite.enabled = false;
         engine.aimCircle.enabled = false;
-        if(deathEffect.Displaying == false)
+        if(deathEffect.state != Instancer.DisplayState.Death && deathEffect.Displaying == false)
         {
 
-            deathEffect.Instance();
+            deathEffect.Instance(gameObject);
+            World.instance.audioSource.PlayOneShot(deathSound);
         }
     }
     protected virtual float Attack1

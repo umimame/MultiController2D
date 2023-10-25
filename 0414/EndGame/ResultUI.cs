@@ -22,7 +22,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private AudioClip playerNameSE;
     [SerializeField] private AudioClip drumRoll;
 
-    [SerializeField] private SceneAsset titleScene;
+    [SerializeField] private string titleScene;
     
     private bool spaceKeyEntered = false; // Space キーが押されたかどうかのフラグ
     // Start is called before the first frame update
@@ -85,7 +85,7 @@ public class ResultUI : MonoBehaviour
         yield return new WaitUntil(() => spaceKeyEntered);
         //Spaceキーが押された後の処理
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(titleScene.name);
+        SceneManager.LoadScene(titleScene);
     }
 
     IEnumerator BlinkText()//テキスト点滅用

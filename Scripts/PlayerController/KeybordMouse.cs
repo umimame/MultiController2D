@@ -20,8 +20,6 @@ public class KeybordMouse : PlayerController
 
     protected override void MiddleUpdate()
     {
-        if (hp.entity <= 0) { state = State.Death; }
-
         switch (state)
         {
             case State.Spawn:
@@ -35,10 +33,6 @@ public class KeybordMouse : PlayerController
                 Death();
                 break;
         }
-        if (state == State.Idol)
-        {
-            alive = true;
-        }
     }
 
     protected override void LastUpdate()
@@ -51,12 +45,16 @@ public class KeybordMouse : PlayerController
     protected override void InputToVelocityPlan()
     {
         base.InputToVelocityPlan();
+
         engine.velocityPlan += inputVelocityPlan * speed.entity;
     }
 
     public void OnMove(InputValue value)
     {
-        inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+        if (alive)
+        {
+            inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+        }
     }
     public void OnAttack1(InputValue value)
     {

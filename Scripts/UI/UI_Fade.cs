@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using My;
-using UnityEngine.UIElements;
 using System;
-using JetBrains.Annotations;
 using UnityEngine.SceneManagement;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 /// <summary>
 /// ‹ó‚ÌCanvas‚É‚Â‚¯‚ÄPrefab‰»‚µ‚ÄŽg—p
@@ -18,7 +14,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
     [field: SerializeField] public FadeParameter inObj;
     [field: SerializeField] public FadeParameter outObj;
     private List<FadeParameter> faders = new List<FadeParameter>();
-    [field: SerializeField] public SceneAsset scene { get; set; }
+    [field: SerializeField] public string scene { get; set; }
 
     public void Start()
     {
@@ -103,8 +99,8 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
     [field: SerializeField] public FadeType type{ get; set; }
     [field: SerializeField] public GameObject parent { get; set; }
     private FadeParameter afterFader;
-    private SceneAsset afterScene;
-    private SceneAsset concurrentScene;
+    private string afterScene;
+    private string concurrentScene;
     private float initialAlpha;
 
     public void Initialize(GameObject parent, float alpha)
@@ -114,7 +110,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
         initialAlpha = alpha;
 
     }
-    public void Initialize(SceneAsset concurrentScene, GameObject parent, float alpha)
+    public void Initialize(string concurrentScene, GameObject parent, float alpha)
     {
         this.concurrentScene = concurrentScene;
         this.parent = parent;
@@ -122,7 +118,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
         initialAlpha = alpha;
 
     }
-    public void Initialize(GameObject parent, float alpha, FadeParameter after = null, SceneAsset afterScene = null)
+    public void Initialize(GameObject parent, float alpha, FadeParameter after = null, string afterScene = null)
     {
         this.afterScene = afterScene;
         this.parent = parent;
@@ -136,7 +132,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
     {
         if (concurrentScene != null) {
 
-            SceneManager.LoadScene(concurrentScene.name); }
+            SceneManager.LoadScene(concurrentScene); }
         if(obj.Obj == null) { return; }
         parent.transform.SetAsLastSibling();
         obj.Instance(parent);
@@ -188,7 +184,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
 
         if (afterScene != null) 
         { 
-            SceneManager.LoadScene(afterScene.name); 
+            SceneManager.LoadScene(afterScene); 
         }
     }
 
@@ -198,7 +194,7 @@ public class UI_Fade : SingletonDontDestroy<UI_Fade>
 [Serializable] public class FadeInstancer : Instancer
 {
     [field: SerializeField] public UI_Fade fadeUI;
-    [field: SerializeField] public SceneAsset scene;
+    [field: SerializeField] public string scene;
 
     public void Initialize()
     {

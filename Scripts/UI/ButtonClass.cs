@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 public class ButtonClass : MonoBehaviour
 {
     private Button button;
-    [field: SerializeField] public SceneAsset scene;
+    [field: SerializeField] public string scene;
     [field: SerializeField] public TextMeshProUGUI buttonText { get; set; }
 
     /// <summary>
@@ -39,7 +39,7 @@ public class ButtonClass : MonoBehaviour
     
     public void SceneLoad()
     {
-        SceneManager.LoadScene(scene.name);
+        SceneManager.LoadScene(scene);
     }
 
     public void ExitGame()

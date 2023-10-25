@@ -6,7 +6,7 @@ public class Hitstop : MonoBehaviour
     
     public SceneState state { get; private set; }
     private float hitstopDuration = 0.2f; // ヒットストップの時間（秒）
-    private float slowMotionDuration =5f; // ヒットストップ後のスローモーションの時間（秒）
+    private float slowMotionDuration =3.0f; // ヒットストップ後のスローモーションの時間（秒）
     private float originalTimeScale;
 
     void Start()

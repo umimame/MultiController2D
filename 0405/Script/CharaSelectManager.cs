@@ -19,7 +19,7 @@ public class CharaSelectManager : MonoBehaviour
 
     public int SelPlayer1 = 0;
     public int SelPlayer2 = 0;
-    [SerializeField] private SceneAsset gameScene;
+    [SerializeField] private string gameScene;
 
     int SelectNum = 0;
     private void Awake()
@@ -97,7 +97,7 @@ public class CharaSelectManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                SceneManager.LoadScene(gameScene.name);
+                SceneManager.LoadScene(gameScene);
             }
         }
     }
