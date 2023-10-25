@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Presets;
 using UnityEngine;
-
+using My;
 [CreateAssetMenu(fileName = "Generator", menuName = "ScriptableObject/Generator")]
 [Serializable]
 public class Generator : ScriptableObject

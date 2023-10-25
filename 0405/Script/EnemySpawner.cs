@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy enemyscript;
     public GameObject enemyPrefab;
     public float spawnInterval = 5.0f;
-    private float nextSpawnTime;
+    [SerializeField] private float nextSpawnTime;
     // Start is called before the first frame update
     void Start()
     {

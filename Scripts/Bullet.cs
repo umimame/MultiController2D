@@ -10,11 +10,13 @@ using UnityEngine;
     [SerializeField] private float time;
     [field: SerializeField] public Parameter pow { get; set; }
     [field: SerializeField] public float lifeTime { get; set; }
+    [SerializeField] private AudioClip sound;
     protected override void Start()
     {
         base.Start();
         time = 0.0f;
         pow.Initialize();
+        World.instance.audioSource.PlayOneShot(sound);
     }
     protected override void Update()
     {
@@ -32,7 +34,7 @@ using UnityEngine;
     }
 
     /// <summary>
-    /// 生存時間を超えると破棄処理<br/>
+    /// 生存時間を超えると与えられた処理(基本は破棄処理)<br/>
     /// 引数は「返り値がvoidの関数」を指定する
     /// </summary>
     /// <param name="action"></param>
@@ -49,7 +51,7 @@ using UnityEngine;
         }
     }
 
-    private void Hit(Collider2D collision)
+    protected virtual void Hit(Collider2D collision)
     {
         if (collision.transform.tag != engine.transform.tag)
         {

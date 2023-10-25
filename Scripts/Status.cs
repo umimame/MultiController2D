@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Unity.VisualScripting;
+using My;
 
 /// <summary>
 /// パラメータ<br/>
@@ -14,12 +15,19 @@ using Unity.VisualScripting;
     [field: SerializeField] // PropertyをInspectorに表示
     public float entity { get; set; }
     [field: SerializeField] public float max { get; set; }
+    [field: SerializeField] public float recover { get;set; }
 
     public Parameter() { }
 
     public void Initialize()
     {
         entity = max;
+    }
+
+    public void Update()
+    {
+        entity += recover;
+        if (entity > max) { entity = max; }
     }
 }
 

@@ -7,13 +7,16 @@ public class Enemy1CS : MonoBehaviour
 {
     private float speed;
     [SerializeField][Tooltip("自身のTransform")] private Transform self;
-    [Tooltip("targetのTransform")] private Transform target;
+    [SerializeField][Tooltip("targetのTransform")] private Transform target;
     // 爆発効果音
     [SerializeField][Tooltip("自身が破壊されたときの音")] private AudioClip explosionSE;
     // 移動中の音
     [SerializeField][Tooltip("自身が移動中の音")] private AudioSource moveSE;
     // 爆発エフェクト
     private EnemyParticle enemyParticle;
+
+    [field: SerializeField] public GameObject[] players1 { get; set; }
+    [field: SerializeField] public GameObject[] players2 { get; set; }
 
 
     public Vector3 scale;
@@ -57,7 +60,6 @@ public class Enemy1CS : MonoBehaviour
     {
         if (other.transform == target)
         {
-            //Debug.Log("ぐえ");
             DestroySelf();
         }
     }
@@ -69,7 +71,6 @@ public class Enemy1CS : MonoBehaviour
     //自身を殺す
     void DestroySelf()
     {
-        //Debug.Log("ぐえ～死んだンゴ");
         ExplosionSE();
         enemyParticle.TriggerEnemyParticle();
         Destroy(this.gameObject);
@@ -89,13 +90,11 @@ public class Enemy1CS : MonoBehaviour
     // 生成されたときに2つのプレイヤーとの距離を比較して、近い方をターゲットに設定
     void SetInitialTarget()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player01");
-        GameObject[] players02 = GameObject.FindGameObjectsWithTag("Player02");
 
         List<Transform> allPlayers = new List<Transform>();
 
-        allPlayers.AddRange(players.Select(player => player.transform));
-        allPlayers.AddRange(players02.Select(player => player.transform));
+        allPlayers.AddRange(players1.Select(player => player.transform));
+        allPlayers.AddRange(players2.Select(player => player.transform));
 
         if (allPlayers.Count >= 2)
         {

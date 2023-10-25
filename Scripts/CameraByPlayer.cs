@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using My;
 
 /// <summary>
 /// アタッチ先のカメラはPlayerの子オブジェクトにすること
@@ -17,7 +18,7 @@ public class CameraByPlayer : MonoBehaviour
         cam = GetComponent<Camera>();
 
         // マウス操作側にメインカメラを設定
-        if (body.GetComponent<KeybordMouse>())
+        if (body.TryGetComponent(out KeybordMouse keybord))
         {
             transform.tag = "MainCamera";
         }

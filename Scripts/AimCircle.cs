@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using My;
 public class AimCircle : MonoBehaviour
 {
     [field: SerializeField] public CircleClamp clamp { get; set; }

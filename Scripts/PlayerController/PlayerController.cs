@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using My;
 /// <summary>
 /// これを継承して各コントローラーの動作を記述する<br/>
 /// InputToVelocityを基本動作に上書きする
 /// </summary>
 public class PlayerController : Chara
 {
+    [SerializeField] private BarByParam hpBar;
+    [field: SerializeField] public Parameter en;
+    [SerializeField] private BarByParam enBar;
     [field: SerializeField] public Vector2 beforeVec { get; set; }
     [field: SerializeField] public Vector3 inputVelocityPlan { get; set; }
     public KeyMap keyMap { get; private set; }
@@ -19,6 +22,7 @@ public class PlayerController : Chara
     [field: SerializeField] public bool ready { get; set; }
     [field: SerializeField] public Shaker cameraShaker { get; set; }
     [SerializeField] private Shaker spriteShaker;
+    [SerializeField] private Instancer deathEffect;
     [field: SerializeField] public bool alive { get; set; }
     private void Awake()
     {
@@ -28,6 +32,8 @@ public class PlayerController : Chara
     protected override void Start()
     {
         base.Start();
+        Debug.Log("Initialize");
+        en.Initialize();
         transform.tag = transform.parent.tag;
         keyMap = new KeyMap();
         //keyMap.Enable();
@@ -43,7 +49,14 @@ public class PlayerController : Chara
     protected override void HeadUpdate()
     {
         base.HeadUpdate();
+        deathEffect.Update();
         InputToVelocityPlan();
+        hpBar.Update(hp);
+        if (alive)
+        {
+            en.Update();
+            enBar.Update(en);
+        }
     }
 
     protected override void MiddleUpdate()
@@ -120,6 +133,11 @@ public class PlayerController : Chara
     {
         engine.sprite.enabled = false;
         engine.aimCircle.enabled = false;
+        if(deathEffect.Displaying == false)
+        {
+
+            deathEffect.Instance();
+        }
     }
     protected virtual float Attack1
     {
@@ -132,5 +150,6 @@ public class PlayerController : Chara
         engine.aimCircle.color = new Color(color.r, color.g, color.b, 0.5f);
         
     }
+
 
 }

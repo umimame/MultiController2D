@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using My;
+using UnityEngine.InputSystem;
 
 public class KeybordMouse : PlayerController
 {
@@ -9,7 +11,6 @@ public class KeybordMouse : PlayerController
     protected override void Start()
     {
         base.Start();
-        
     }
 
     protected override void HeadUpdate()
@@ -34,6 +35,10 @@ public class KeybordMouse : PlayerController
                 Death();
                 break;
         }
+        if (state == State.Idol)
+        {
+            alive = true;
+        }
     }
 
     protected override void LastUpdate()
@@ -41,22 +46,30 @@ public class KeybordMouse : PlayerController
         base.LastUpdate();
         engine.LookAtVec(clamp.moveObject.transform.position);
         targetPos = (clamp.moveObject.transform.position - transform.position).normalized;
-        hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
     }
 
     protected override void InputToVelocityPlan()
     {
         base.InputToVelocityPlan();
-        engine.velocityPlan += Move;
+        engine.velocityPlan += inputVelocityPlan * speed.entity;
     }
 
-    protected override Vector3 Move
+    public void OnMove(InputValue value)
     {
-        get { return keyMap.Keybord.Move.ReadValue<Vector2>().normalized * speed.entity; }
+        inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
     }
-    protected override float Attack1
+    public void OnAttack1(InputValue value)
     {
-        get { return keyMap.Keybord.Attack1.ReadValue<float>(); }
+        if (alive)
+        {
+            hunger.inUse[0].trigger = Convert.ToBoolean(value.Get<float>());
+        }
     }
-
+    public void OnAttack2(InputValue value)
+    {
+        if (alive)
+        {
+            hunger.inUse[1].trigger = Convert.ToBoolean(value.Get<float>());
+        }
+    }
 }

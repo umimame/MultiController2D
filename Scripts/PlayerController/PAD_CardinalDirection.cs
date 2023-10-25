@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Pad : PlayerController
+public class PAD_CardinalDirection : PlayerController
 {
     protected override void Start()
     {
@@ -29,11 +29,9 @@ public class Pad : PlayerController
             case State.Idol:
                 base.MiddleUpdate();
                 clamp.moveObject.transform.position = transform.position;
-                clamp.moveObject.transform.position += new Vector3(inputVelocityPlan.x, inputVelocityPlan.y) * speed.entity;
+                clamp.moveObject.transform.position += new Vector3(inputVelocityPlan.x, inputVelocityPlan.y) * clamp.radius;
 
                 LookAtMovingDirection();
-                //hunger.inUse[0].trigger = Convert.ToBoolean(Attack1);
-                //hunger.inUse[1].trigger = Convert.ToBoolean(Attack2);
                 break;
             case State.Death:
                 engine.CollDisabled();
@@ -72,35 +70,13 @@ public class Pad : PlayerController
         beforeVec = inputVelocityPlan;
     }
 
-    /// <summary>
-    /// keyMap.Padの省略プロパティ
-    /// </summary>
-    protected override Vector3 Move
-    {
-        get { return keyMap.Pad.Move.ReadValue<Vector2>(); }
-    }
-
-    protected override float Attack1
-    {
-        get { return keyMap.Pad.Attack1.ReadValue<float>(); }
-    }
-
-    public float Attack2
-    {
-        get { return keyMap.Pad.Attack2.ReadValue<float>(); }
-    }
-    public float Attack3
-    {
-        get { return keyMap.Pad.Attack3.ReadValue<float>(); }
-    }
-    public float Attack4
-    {
-        get { return keyMap.Pad.Attack4.ReadValue<float>(); }
-    }
-
     public void OnMove(InputValue value)
     {
-        inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+        if (alive)
+        {
+            inputVelocityPlan = new Vector3(value.Get<Vector2>().x, value.Get<Vector2>().y, 0.0f);
+
+        }
     }
     public void OnAttack1(InputValue value)
     {
@@ -119,6 +95,10 @@ public class Pad : PlayerController
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        inputVelocityPlan = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);
+        if (alive)
+        {
+            inputVelocityPlan = new Vector3(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, 0);
+
+        }
     }
 }

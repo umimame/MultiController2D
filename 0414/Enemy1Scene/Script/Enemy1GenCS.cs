@@ -12,7 +12,6 @@ public class Enemy1GenCS : MonoBehaviour
 
     [SerializeField] private List<Transform> targets; // 複数のターゲット
 
-    // Start is called before the first frame update
     void Start()
     {
         GenSpan = 3;
@@ -21,13 +20,10 @@ public class Enemy1GenCS : MonoBehaviour
 
         // ターゲットの初期化
         targets = new List<Transform>();
-        AssignPlayersAsTargets();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Update");
         time += Time.deltaTime;
 
         if (time >= GenSpan)
@@ -61,8 +57,9 @@ public class Enemy1GenCS : MonoBehaviour
     }
 
     [ContextMenu("Assign Players as Targets")]
-    private void AssignPlayersAsTargets()
+    public void AssignPlayersAsTargets()
     {
+        Debug.Log("Assign");
         // "Player01" または "Player02" タグを持つ全てのオブジェクトを取得
         GameObject[] players1 = GameObject.FindGameObjectsWithTag("Player01");
         GameObject[] players2 = GameObject.FindGameObjectsWithTag("Player02");
@@ -73,14 +70,26 @@ public class Enemy1GenCS : MonoBehaviour
         // プレイヤー1の配列をリストに追加
         foreach (GameObject player in players1)
         {
-            targets.Add(player.transform);
+            if(player.TryGetComponent(out Rigidbody2D rb))
+            {
+                targets.Add(player.transform);
+            }
         }
 
         // プレイヤー2の配列をリストに追加
         foreach (GameObject player in players2)
         {
-            targets.Add(player.transform);
+
+            if (player.TryGetComponent(out Rigidbody2D rb))
+            {
+
+                targets.Add(player.transform);
+            }
         }
+
+        Enemy1CS clone = EnemyPrefab.GetComponent<Enemy1CS>();
+        clone.players1 = players1;
+        clone.players2 = players2;
     }
     // ランダムにターゲットを選択する
     private Transform GetRandomTarget()

@@ -19,6 +19,7 @@ MonoBehaviour:
   <playerColorPre>k__BackingField:
   - {r: 0.33333334, g: 0.8352941, b: 1, a: 1}
   - {r: 0.8980392, g: 0.16470589, b: 0.16470589, a: 1}
+  <playerColorSets>k__BackingField: []
   <cameraRectPre>k__BackingField:
   - serializedVersion: 2
     x: 0

@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
-
+using My;
 public class Hitstop : MonoBehaviour
 {
-    private bool isHitstopActive = false;
+    
+    public SceneState state { get; private set; }
     private float hitstopDuration = 0.2f; // ヒットストップの時間（秒）
     private float slowMotionDuration =5f; // ヒットストップ後のスローモーションの時間（秒）
     private float originalTimeScale;
@@ -15,18 +16,16 @@ public class Hitstop : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // 例としてSpaceキーでヒットストップを発生させる
+        if (state == SceneState.Start)
         {
-            if (!isHitstopActive)
-            {
-                StartCoroutine(HitstopEffect());
-            }
+            StartCoroutine(HitstopEffect());
         }
+        
     }
 
     IEnumerator HitstopEffect()
     {
-        isHitstopActive = true;
+        state  = SceneState.Idol;
 
         // ヒットストップ時の処理（ここにヒットストップ時の演出などを追加）
 
@@ -47,7 +46,6 @@ public class Hitstop : MonoBehaviour
 
         // ヒットストップ解除
         Time.timeScale = originalTimeScale;
-
-        isHitstopActive = false;
+        state = SceneState.Next;
     }
 }

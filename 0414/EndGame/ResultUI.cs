@@ -10,7 +10,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private Text Result;
     [SerializeField] private Text Who;
     [SerializeField] private Text PlayerName;
-    [SerializeField] public int winnerPlayer { get; set; } = 0;
+    [field: SerializeField] public int winnerPlayer { get; set; } = 0;
     [SerializeField] private Text HowManyKills;
     [SerializeField] private Text KillsCount;
     [SerializeField] private Text HowManyShots;
@@ -18,9 +18,9 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private Text Time;
     [SerializeField] private Text TimeCount;
     [SerializeField] private Text ClickToTitle;
-
-    [SerializeField] private AudioSource playerNameSE;
-    [SerializeField] private AudioSource drumRoll;
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip playerNameSE;
+    [SerializeField] private AudioClip drumRoll;
 
     [SerializeField] private SceneAsset titleScene;
     
@@ -29,8 +29,6 @@ public class ResultUI : MonoBehaviour
     void Start()
     {
         StartCoroutine(DisplayText());
-        Debug.Log("playerNameSEのデカさ" + playerNameSE.volume);
-        Debug.Log("drumRollのデカさ" + drumRoll.volume);
     }
 
     // Update is called once per frame
@@ -63,22 +61,22 @@ public class ResultUI : MonoBehaviour
         Who.text = "勝者は...";
 
         yield return new WaitForSeconds(2f);
-        drumRoll.Stop();
+        source.Stop();
 
         PlayerName.text = "プレイヤー" + winnerPlayer; // 最後に残ったプレイヤーのタグを参照
         PlayerNameSE();
 
-        yield return new WaitForSeconds(3f);
-        HowManyKills.text = "倒された雑魚敵の数:";
-        KillsCount.text = "殺した数";//変数参照,変数未実装
+        //yield return new WaitForSeconds(3f);
+        //HowManyKills.text = "倒された雑魚敵の数:";
+        //KillsCount.text = "殺した数";//変数参照,変数未実装
 
-        yield return new WaitForSeconds(1f);
-        HowManyShots.text = "発射された弾の数:";
-        ShotsCount.text = "発射した数";//変数未実装
+        //yield return new WaitForSeconds(1f);
+        //HowManyShots.text = "発射された弾の数:";
+        //ShotsCount.text = "発射した数";//変数未実装
 
-        yield return new WaitForSeconds(1f);
-        Time.text = "試合時間:";
-        TimeCount.text = "時間数える変数";//変数未実装
+        //yield return new WaitForSeconds(1f);
+        //Time.text = "試合時間:";
+        //TimeCount.text = "時間数える変数";//変数未実装
 
         yield return new WaitForSeconds(0.5f);
         ClickToTitle.text = "SPACEキーでタイトルに戻る";
@@ -88,7 +86,6 @@ public class ResultUI : MonoBehaviour
         //Spaceキーが押された後の処理
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(titleScene.name);
-        Debug.Log("タイトル行きまっせ～");
     }
 
     IEnumerator BlinkText()//テキスト点滅用
@@ -105,10 +102,10 @@ public class ResultUI : MonoBehaviour
     }
     void PlayerNameSE()
     {
-        playerNameSE.PlayOneShot(playerNameSE.clip);
+        source.PlayOneShot(playerNameSE);
     }
     void DrumRoll()
     {
-        drumRoll.PlayOneShot(drumRoll.clip);
+        source.PlayOneShot(drumRoll);
     }
 }
